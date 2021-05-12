@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="EUC-KR"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation=
+		"http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd">
+		
+		<bean id="rectangleBean" class="rectangle.exam.RectangleImpl">
+			<constructor-arg>
+				<value type="double">10.0</value>
+			</constructor-arg>
+			
+			<constructor-arg>
+				<value type="double">4.0</value>
+			</constructor-arg>
+		</bean>
+</beans>

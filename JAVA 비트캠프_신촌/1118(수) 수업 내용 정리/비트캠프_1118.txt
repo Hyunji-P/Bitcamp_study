@@ -1,0 +1,185 @@
+[오전수업]
+
+emp테이블
+	id , name , gender , hobby , salary , hiredate
+
+Emp클래스 
+	emp 테이블에 추가될 1건(bean 객체)
+
+example 폴더
+	From01.jsp : 입력 양식 만들기
+	To01.jsp : 넘어온 데이터 처리하기 
+
+p. 37
+1. html에서 주요한 태그 
+	form
+	table
+	a
+	
+	< > 기호로 둘러쌓인 범위를 "태그"라고 함 
+
+	속성	 속성값  
+	bgcolor = "yellow" 
+	text = "brack"
+
+
+
+	
+
+3. <br> : 엔터키
+   <!--  --> : html 주석 
+   <form> 
+   동사무소 가면 신청양식 , 비행기 타면 양식을 만들어줄때 그것을 form이라고 함 
+   양식을 만들려면 id , 이름 등등 넣어야함 --> <input>
+   
+   <form action=""> : 어디에서 어디로 갈지 (from01 → to01)
+
+4. 파라미터
+	폼 양식에서 넘겨 주는 데이터의 집합 
+	넘겨주는 값 
+	name 속성에 들어있는 변수들이 파라미터
+	name , type , value : 속성 
+	내장 객체인 request에 포함이 되어서 다음 페이지로 넘겨 집니다. 
+
+5. 타입의 속성
+	text(기본값)
+   	radio : 동그라미 버튼
+	checkbox : 체크박스
+	number : 숫자
+	date :  날짜
+	submit : 전송
+	reset : 초기화 
+
+
+2. https://www.w3schools.com/
+
+HTML Form Attributes
+
+HTML Forms
+
+
+6. p.56
+
+method : 방법 , 방식 
+
+전송 방식 
+	get 방식
+	http://localhost:8989/MyWeb/example/To01.jsp?id=a&name=a&gender=on&hobby=%EB%8B%B9%EA%B5%AC&salary=&hiredate=a
+	ex) 엽서
+	
+	post 방식	
+	http://localhost:8989/MyWeb/example/To01.jsp
+	http 라는 body 몸체에 속성값이 숨겨져서 전송함 
+	ex) 편지
+
+p.55 
+
+웹 페이지 주소 형식 
+
+http://localhost:8989/MyWeb/example/To01.jsp
+?
+id=a
+&name=a
+&gender=on
+&hobby=%EB%8B%B9%EA%B5%AC
+&salary=
+&hiredate=a
+
+
+7. 웹프로그래밍 흐름 : 58쪽
+	자바 클래스로 바뀌고 그때 내장객체라는게 있음 
+
+
+   내장 객체 : 85쪽 
+	자바
+	System.out.println
+	System.in
+
+            out , in 객체 (java에서 자동으로 만들어준 객체임)
+            = jsp에서는 내장객체
+
+	jsp에서 자바 코딩 하려고 미리 빌트인 하며 만들어 놓은 내장객체라고 함 
+
+
+	ex) request 내장 객체가 미리 만들어져있음 
+	내부
+	id 	    =   어쩌구
+	gender 	    =   1
+	name 	    =   어쩌구 
+	salary 	    =   10
+	파라미터 이름 = 파라미터 값 
+
+           → request 바구니를 to.jsp에 전달하고 
+	   to.jsp는 데이터들을 쪼개야함 
+
+    request 내장 객체 관련 메소드 : 87 ~ 88쪽
+	★ 파라미터 값을 가져 올때 getParameter() : 모든 파라미터는 String 으로 리턴됨 
+                글자 깨짐 setCharacterEncoding() 
+	    체크박스 getParameterValues() : 반환타입은 String[] 배열 
+
+   *from 
+   아이디<input name = "id" type = "text"><br> 
+	                   1번 : 파라미터 이름 
+
+   *To
+   String id = request.getParameter("id");
+           2번 : 자바 변수 이름	         3번 : 파라미터 이름  
+
+
+   ▶ 1번과 3번은 반드시 동일해야함
+
+
+8. out : 출력을 하기 위한 내장 객체 
+
+   스크립트 릿 : 71쪽
+	<% 자바 공간 %> 
+
+
+
+   표현식 : 72쪽
+	<%= 표현식 %> 
+
+
+9. 입력값 default 하는 방법 : value 를 뒤에 적어주면 됨 
+   value = "hoho"
+   value = "김철수"
+   checked="checked"
+
+
+[오후 수업]
+10. <tr> : 행 , <td> : 열 
+
+11. form 과 table 중첩  	
+	example 폴더
+	From02.jsp : 입력 양식 만들기
+	To02.jsp : 넘어온 데이터 처리하기 
+
+	model.Emp 클래스
+		데이터 1건을 처리해주는 bean 클래스
+		VO(value object) 또는 DTO(data transfer object) 객체 
+		
+
+	model.EmpDao 클래스
+		Dao(Data Access Object) 클래스 
+		데이터 베이스와 연동하여 추가 / 수정 / 삭제 / 조회 등을 수행해주는 클래스 
+
+지시어 : 76쪽
+page 지시어 : 77쪽
+Content Type : 62쪽 
+서브의 응답 코드 : 64쪽 
+
+
+12. 스크립트 릿 쪽에 코딩할수 있지만 안에 들어가는 코드가 많아질 수 있기 때문에
+    자바쪽으로 넘김  
+지시어 : 76쪽
+<%@ : 지시어 
+ex) 자바로 바뀔때 안에 내용을 보고 처리해라 . 
+
+자바파일을 쓰려면 page 지시어의 import 를 해야한다. 
+
+
+13. 우선 자바쪽에 빈클래스를 먼저 만들고 
+jsp 파일에서 setter 로 값을 넣어준다.
+
+
+

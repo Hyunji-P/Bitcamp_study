@@ -1,0 +1,417 @@
+[오전 수업]
+
+1. 제약조건 
+
+제약조건의 이름이 추상적이니
+알아볼 수 있게끔 
+이름변경을 하려고 함 
+
+
+p.169
+p.170
+p.176
+
+
+
+
+2. dcl 개요
+
+
+p.13 정리하기
+
+
+p.133
+
+ex. 회사의 관리자가 사원의 id와 비번을 받아서 어떠한 데이터베이스 환경에 접속해서
+무언가를 작업할 수 있도록 능력을 부여 , 회수 하는 것을 dcl이라고 함 
+
+
+role(롤) 
+권한을 여러개 묶어서 줄수 있게 그룹화 한 바구니라고 이해할 것 
+ex. resource 
+
+------------------------------------------------------------------------------------------------------------------------------------------
+p.134
+다른 유저의 테이블 접근 
+
+[순서]
+나는 데이터 베이스 관리자 입니다.
+사용자 철수와 영희에 대한 계정을 만들고  dcl실습을 진행할 예정입니다.
+
+■관리자 세션
+
+quota는 tablespace에 할당 받는 공간을 의미한다. 
+테이블을 만들면 파일이 커짐 
+테이블을 무제한으로 만들 수 있도록 두지 않음(제약을 둠)
+제약을 둘때 그 공간을 quota라고 함 
+quota unlimited on users : 무제한으로 테이블을 만들수 있게 하겠다. 
+만약 , 5메가로 제한을 두겠다 --> quota 5m on users 
+
+users 테이블 스페이스는 테이블이 저장되는 논리적인 공간이다. 
+
+-- 1.철수와 영희 계정 생성하기 
+create user soo identified by soo123 
+quota unlimited on users
+account unlock;
+
+create user hee identified by hee456
+quota unlimited on users
+account unlock;
+
+(p.136참고)
+-- 6. 철수와 영희에 대한 기본 테이블 스페이스를 다음과 같이 변경합니다.
+-- 3.  철수와 영희에게 로그인 권한을 준다.
+
+alter user soo default tablespace users;
+alter user hee default tablespace users;
+grant create session to soo , hee;
+
+
+-- 7. 특정 사용자가 사용하고 있는 기본 테이블 스페이스 확인하기 
+-- user_tables ; : 내가 가지고 있는 테이블 목록 보기 
+-- dba_tables ; : 관리자가 가지고 있는 테이블 목록 보기 ( 모든 사용자의 목록을 다 볼 수 있음)
+-- 테이블이 저장되는 공간을 '테이블 스페이스'라고만 이해하기 
+select username, default_tablespace
+from dba_users
+order by username;
+
+-- 9. 테이블 생성 권한 주기 
+grant create table to soo , hee;
+
+-- 20. 뷰 생성 권한 주기 
+grant create view to soo , hee;
+
+■ 철수 세션
+-- 2. 철수에 대한 접속 아이콘을 생성해보도록 한다. 
+-- 하지만 , create session 권한 부족으로 접속이 불가능하다.
+-- (아이디와 비밀번호가 있다고 해서 바로 접속이 불가함 , 따라서 관리자는 접속 권한을 부여해야한다.)
+
+-- 4. 철수에 대한 접속 아이콘을 생성해보도록 한다. 
+
+-- 8. 철수가 테이블을 생성하려고 한다. 
+-- 하지만 , insufficient privileges 권한 부족으로 테이블 생성이 불가능하다.
+-- 관리자에게 권한 요청을 해야한다. 
+
+create table employees(
+	id varchar2(20),
+	name varchar2(30),
+	salary number
+);
+
+-- 10. 권한을 부여 받았으므로 , 테이블 생성이 가능하다. 
+create table employees(
+	id varchar2(20),
+	name varchar2(30),
+	salary number
+);
+
+-- 11. 데이터 insert하기 
+insert into employees values('hong','홍길동' , 100);
+insert into employees values('kim','김유신' , 100);
+insert into employees values('lee','이순신' , 100);
+commit;
+
+
+-- 13. 철수가 영희의 employees 테이블을 조회하려고 한다. 
+-- 오류 : "table or view does not exist"
+-- 오타이거나 select 조회 접근 권한이 부족하여 발생하는 오류메세지이다. 
+-- 영희에게 접근 권한을 부여 받아야한다. 
+select * from hee.employees;
+
+
+-- 15. 철수가 영희의 employees 테이블을 다시 조회해본다. 
+select * from hee.employees;
+
+-- 17. 철수가 영희에게 employees 를 조회할 수 있도록 select 권한을 부여한다. 
+grant select on employees to hee;
+
+
+-- 19. (문제) 철수와 영희에 대하여 각각 employees 테이블에 대하여 사원들의 이름만 보여주는 view 를 생성하세요.
+
+-- 21. 이름만 보여주는 view 생성하기 
+create or replace view sooview
+as
+select name from employees;
+
+-- 22. 영희에게 view 권한을 준다. 
+grant select on sooview to hee;
+
+-- 25. 영희 뷰 조회하기
+select * from hee.heeview;
+
+■ 영희 세션
+-- 5. 영희에 대한 접속 아이콘을 생성해보도록 한다. 
+
+-- 12. 영희도 다음과 같이 테이블을 생성하고 , 데이터를 추가해본다. 
+create table employees(
+	no number primary key,
+	name varchar2(30),
+	incom number(10,2)
+);
+
+insert into employees values(10,'윤봉길',555);
+insert into employees values(20,'김구',666);
+insert into employees values(30,'이봉창',777);
+commit;
+
+-- 14. 영희가 철수에게 employees 를 조회할 수 있도록 select 권한을 부여한다. 
+grant select on employees to soo;
+
+
+-- 16. 영희가 철수의 employees 테이블을 조회하려고 한다.
+-- 이에대한 적절한 조치를 취하고 , 테스트하도록 하세요.
+
+
+-- 18. 영희가 철수의 employees 테이블을 조회해본다. 
+select * from soo.employees;
+
+
+-- 23. 이름만 보여주는 view 생성하기 
+create or replace view heeview
+as
+select name from employees;
+
+-- 24. 철수에게 view 조회 권한 주기 
+grant select on heeview to soo;
+
+-- 26. 철수 뷰 조회하기
+select * from soo.sooview;
+
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+
+
+3. 사용자 변경
+- command 창에서 실행해야함 
+[순서]
+1) 김철수가 비번을 잊어버렸습니다. 
+2) 관리자는 비번을 바꿔 주고 , 로그인 시 비번을 수정하도록 요구해야 한다. 
+3) 사용자는 바뀐 비번을 이용하여 로그인하고 , 신규 비번을 입력해야 한다. 
+
+
+관리자 세션 
+관리자는 철수의 비번을 변경해주고 , 암호 만기 옵션을 지정해 준다. 
+alter user soo identified by a1234 password expire;
+
+김철수 세션
+접속 해제 후 다시 재접속 하면 현재 확인 불가 
+우클릭 > 속성에서 비밀번호 a1234  변경불가
+
+관리자 세션 
+sql developer 에서 신규 비번 입력이 안되므로 다음과 같이 처리한다. 
+alter user soo identified by soo789;
+
+김철수 세션
+우클릭 > 속성 > 비밀번호 soo789로 변경 
+
+
+4. 사용자 삭제 
+
+drop user sample ---> 객체를 가지고 있으므로 삭제 불가 
+따라서 , cascade 옵션을 적어줘야함 
+
+
+
+5. p144
+   p145
+
+
+
+6. 철수 세션 
+-- 사용자 시스템 권한 조회 
+select * from user_sys_privs;
+
+7. p.147
+
+시스템 권한 제거 
+
+원래 일반사용자가 서로 권한을 줄수 없음 
+with admin option 옵션을 부여하면
+사용자가 다른 사용자에게 권한을 부여할 수 있음 
+
+revoke 하면 당사자만 권한이 뺏기고 
+나머지 권한을 받은 사용자는 권한이 남아있음 
+
+
+[with admin option  순서]
+1) 관리자가 철수에게 테이블 생성 권한을 with admin option 과 함께 부여 한다.
+2) 철수는 이것을 영희에게 부여할 수 있다. 
+3) 관리자는 철수에게 테이블 생성 권한을 박탈한다.
+4) 이후 어떻게 전개되는지 확인해라.
+
+
+■ 관리자 세션
+--1.철수와 영희의 create table 권한을 박탈한다. 
+revoke create table from soo,hee;
+
+--2. with admin option 권한 주기 
+grant create table to soo with admin option;
+
+--7. 철수의 권한을 박탈한다.
+revoke create table from soo;
+
+
+■ 철수 세션
+--3. 테이블 생성하기 
+create table test01(id varchar2(10));
+
+--4. 권한 보기 
+-- admin_option : yes 면 다른 사용자에게 권한은 부여할 수 있음 
+select * from user_sys_privs;
+
+--5. admin_option : yes 면 영희에게 create table 권한을 부여할 수 있다.
+grant create table to hee;
+
+--8. 테이블 생성하기 
+--"insufficient privileges" 오류메세지 나옴 
+create table test03(id varchar2(10));
+
+■ 영희 세션
+-- 6. 테이블 생성하기 
+create table test02(id varchar2(10));
+
+
+--9. 테이블 생성하기 
+create table test04(id varchar2(10));
+
+
+-------------------------------------------------------------------------------------------
+--[객체권한 순서]
+
+■ 철수 세션
+-- 1. 철수가 영희에게 employees의 salary 컬럼을 수정할 수 있는 객체 권한을 부여하세요.
+grant update(salary) on employees to hee;
+
+-- 3. 급여가 바뀌었는지 테이블 조회하기 
+select * from employees;
+
+-- 4. 내가 부여해준 객체 권한 확인하기 
+select * from user_col_privs_made;
+
+■ 영희 세션
+-- 2. salary 수정해보자.
+update soo.employees set salary = 1234;
+commit;
+
+
+--------------------------------------------------------------------------------------------
+p.151
+procedure = 자바에서 void 메소드 같은거..로 생각하기
+
+
+[오후수업]
+
+with grant option
+■ 철수 세션
+
+grant select on employees to hee;
+
+grant select on employees to hee with grant option;
+
+revoke select on employees from hee;
+
+■ 영희 세션
+다음 문장들은 권한이 불충분하여 오류가 발생한다. 
+select * from soo.employees ; 
+
+hr 사용자는 human resource의 줄인 말로 오라클 설치시 기본으로 생성되는 사용자 입니다. 
+with grant option이 없으므로 다른 사용자에 부여를 하지 못한다. 
+grant select on soo.employees to hr;
+
+
+
+
+롤(role)
+권한을 하나로 묶어 놓은 집합체(collection , bottle) 개념으로 보면 된다.
+on 뒤에 올수도 있고  , to뒤에 올수도 있음 
+
+■ 관리자 세션
+--1. 신규 사용자 '곰돌이'를 생성하고 , 롤을 이용하여 권한을 부여하세요.
+create user gomdori identified by oracle
+quota 1m on users
+account unlock;
+
+alter user gomdori default tablespace users;
+--2. 롤 생성하기
+create role gom_role;
+
+--3. 곰돌이에게 접속 권한 , 테이블 생성 , 뷰 생성 , 롤 생성 권한을 부여하려고 한다. 
+-- gom_role이라는 통(bottle) 안에 담아 둔다. 
+grant create session , create table , create view , create role
+to gom_role; 
+
+-- 4. gom_role 롤 권한 부여 
+grant gom_role to gomdori;
+
+-- 5. 롤확인을 위한 사전(확인요망)
+-- 수여자가 곰돌이인 롤의 내용들 조회하기 
+-- 꼭 대문자로 조회할 것 
+select * from dba_role_privs where grantee = 'GOMDORI' ;
+
+--6.'gom_role'에 들어있는 권한들의 내용 보기 
+-- 꼭 대문자로 조회할 것 
+select * from role_sys_privs where role = 'GOM_ROLE' ;
+
+
+■ 곰돌이 세션
+--7. 곰돌이가 employees 테이블을 생성합니다.
+create table employees(
+	id varchar2(10), name varchar2(30) , jumsu number
+);
+
+insert into employees values('kim','김유신',85);
+insert into employees values('lee','이순신',70);
+commit;
+
+
+-- 8. 영희에게 employees 테이블을 조회,추가,수정,삭제 등의 기능을 수행하기 위하여 롤을 생성하고 , 해당 롤을 영희에게 수여한다.
+create role emprole;
+
+--9. 권한 부여하기
+grant select on employees to emprole;
+grant update on employees to emprole;
+grant insert, delete on employees to emprole;
+
+
+--10. hee한테 권한 넘기기 
+grant emprole to hee;
+
+-- 12. 곰돌이에서 employees 테이블 확인 하기 
+select * from employees;
+
+-- 13. 해당 롤에게 부여했던 dml 문장들을 모두 박탈한다.
+-- 그러면 , emprole 를 부여 받았던 영희는 이제 select 기능만 사용 가능하다. 
+revoke insert , delete , update on employees from emprole;
+
+■ 영희 세션
+--11. 다음 각 문장들을 수행한 다음 '곰돌이' 세션에서 꼭 확인해봐야한다.
+-- 영희 세션을 접속해제한 다음 재접속한다.
+select * from gomdori.employees;
+
+insert into gomdori.employees values('shin', '신사임당' , 60);
+commit;
+
+update gomdori.employees set jumsu = 100;
+commit;
+
+delete from gomdori.employees where id = 'lee' ;
+commit;
+
+
+-- 14. 영희세션을 접속 해제한다음 다시 접속한다.
+다음 문장이 수행되는지 확인하세요
+insert into gomdori.employees values('an', '안중근' , 60);
+commit;
+
+
+-----------------------------------------------------------------------------
+p.156
+데이터 사전의 이름이 dict이다.
+desc dict;
+
+권한 관련 사전 조회하기
+select * from dict
+where table_name like '%PRIVS%'
+order by table_name;
+

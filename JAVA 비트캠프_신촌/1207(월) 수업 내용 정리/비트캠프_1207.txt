@@ -1,0 +1,94 @@
+[오전 수업]
+
+1. 부트 스트랩
+	responsive, mobile-first websites
+	모바일에 최적화된 프레임워크
+	반응형 웹 : 화면을 줄이거나 키우면 그 화면 크기에 맞게 동적으로 움직임 
+
+
+	grids basic 
+	전체 화면을 12개의 column 으로 나눔 
+
+	Bootstrap Grid System
+	Grid Classes 
+	xs < sm < md < lg 
+	
+	* 순서
+	1) <div class="container">
+	2) <div class="row">
+	3) .col-*-* 
+	
+
+2. chap06.bootstrap 폴더 생성
+	gridEx01.jsp 
+	순서) bootstrap.min.css → jquery.min.js → popper.min.js → bootstrap.min.js (기본제공)
+	       부트스트랩이 jquery 를 참조 
+	       <script> 
+	       <style> 
+	- 경로 로컬 pc저장 후 drag&drop
+
+	* HTML 교안
+	P.50
+
+	offset 
+	12개의 column 에서 시작 위치를 정함 
+	
+	 colum 의 숫자를 편하게 바꾸려고 함 
+  	 <% 스크립트릿 %> : 변수 정의 → <%=표현식%>
+
+4. BS4 Forms 
+   	formTest01.jsp 
+	
+   Bootstrap 4 Custom Forms
+	formTest02.jsp 
+	
+5. * HTML 교안 P.51
+loginForm1.jsp
+
+★ 꼭 적어 줄 것 
+role="form" 
+class="form-horizontal"
+
+panel : 컨테이너 박스가 담길 수 있게 만들어주는 속성 값 
+	Contextual Classes : 판넬 강조 색깔 
+
+placeholder : 입력하지 않았을 때 보여주는 문구
+
+botton : 버튼 크기조정 , 강조 색깔 구분 가능 
+	disabled : 선택 불가 속성 값 
+
+Bootstrap Tooltip Plugin
+	data-toggle="tooltip"
+	title="~!@" 
+	data-placement : 툴팁 위치 
+	tooltip( ) ; 메소드 
+	마우스를 올렸을 때 메세지가 나옴 
+
+6. * HTML 교안 P.52
+tableExam01.jsp
+★ class="table" 필수 
+class 속성
+	success : 자동으로 색깔이 들어감
+
+Contextual Classes : <tr> , <td>
+
+7. * HTML 교안 P.53
+detailViewEx01.jsp
+
+badge 속성 
+
+popover : 머릿글에 있는 도움말
+
+data-trigger : 자동으로 동작하라는 뜻 
+	     마우스가 들어갔을 때 자동으로 처리 : data-trigger = "hover"
+
+8. * HTML 교안 P.54
+Bootstrap Tabs and Pills
+
+class="nav nav-tabs" : 탭을 만들어 주는 속성
+
+Bootstrap Glyphicons
+
+
+---------------------------------------------------------------------------------------------
+깃허브 사용법

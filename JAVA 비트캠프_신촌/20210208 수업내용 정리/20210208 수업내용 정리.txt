@@ -1,0 +1,84 @@
+[오전 수업]
+
+1.  MemberIdcheckController
+
+만약 , A라는 id를 입력하고 중복 검사를 하면 isCheck 값이 true 로 바뀜
+바로 B라는 id를 입력하면 중복 검사를 안했는데도 이전 상황 때문에 isCheck 값이 true 로 남아있음
+
+즉 , 중복체크를 안했는데도 한번 true 로 바뀌면 계속 true 값이라는 것 
+
+
+==> 이를 방지하기 위해 , id를 입력 하는 동안엔 무조건 false 값을 넣는다. 
+        onkeyup 이벤트 함수 사용 
+
+
+
+
+2. MemberZipcheckController
+
+
+select * from  postcodes 
+where emd_nm like '%공덕%' 
+or rd_nm like '%공덕%' or 
+search_word like '%공덕%' 
+order by si_nm, sgg_nm, rd_nm
+
+
+매퍼 파일에서 %를 못읽는 듯 함 
+계속 nullpointerexception 나옴 
+
+==> 오류 해결을 위해  map  컬렉션을 이용하여 %를  sql 문장 밖에다가 코딩함 
+
+toomuch ~ exception 
+==> 동네 검색을 하였을 때 데이터가 여러개인데 매퍼파일을 호출할 때 selectOne 메소드로 호출하다보니 에러
+        selectList( ) 메소드로 수정 
+
+value="${fn:trim(oneitem.si_nm)} ${fn:trim(oneitem.sgg_nm)} ${fn:trim(oneitem.rd_nm)} ${fn:trim(oneitem.bd_ma_sn)}(${fn:trim(oneitem.emd_nm)} ${fn:trim(oneitem.search_word)})" />
+ex) 서울시 마포구 ~~~ 
+
+좌우로 공백이 있을 수도 있으므로 trim 사용 
+한칸 씩 띄어쓰기 
+
+
+문제 상황 
+가짜 우편 주소는 <form:input> 
+진짜 우편 주소는 <input>
+
+일때 , 우편번호와 주소는 읽기전용이므로 가짜우편주소도 <input> 으로 변경해줘야지만
+진짜 우편주소 <input> 태그 안에 값이 제대로 들어감 
+
+
+3. MemberInsertController
+
+체크박스 , 콤보박스 , 라디오 버튼에 value 값이 숫자로 넘어감 
+1) 방법 : itemLabel="mykey" itemValue="mykey" 로 처리 
+2) 방법 : myValue 로 넘기고 컨트롤러에서 양자택일 구문으로 값 처리 
+
+
+4. MemberDetailViewController
+
+5. MemberDeleteController
+doGet() 매개변수에 session 객체를 넣어준다.
+==> 회원탈퇴 시 세션 정보를 삭제해야되기 때문에 
+
+매출 데이터는 set null
+게시물 데이터는 set null 이나 set cascade 중 택일 
+
+* 06. 테스트 시나리오 
+
+6. MemberListController 
+
+
+FlowParameters 클래스가 커맨드 객체 이기 때문에
+doGet( ) 메소드에서 매개변수를 커맨드 객체로 지정 
+
+
+
+
+
+
+
+
+
+
+

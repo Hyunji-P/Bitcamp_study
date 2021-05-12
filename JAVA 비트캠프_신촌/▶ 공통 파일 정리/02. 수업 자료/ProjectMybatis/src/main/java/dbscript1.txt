@@ -1,0 +1,84 @@
+-- 사용자 삭제
+drop user gomdori cascade ;
+
+-- 사용자 생성
+create user gomdori identified by oracle account unlock ;
+
+-- 권한 부여하기
+grant connect, resource to gomdori ;
+
+drop table members;
+create table members(
+	id varchar2(20) primary key,
+  name varchar2(20),
+	age number, 
+	gender varchar2(6) 
+);
+
+insert into members values('hong', '홍길동',21,'남자');
+insert into members values('park', '박영희',25,'여자');
+insert into members values('kim', '김철수',30,'남자');
+insert into members values('sim', '심형래',40,'남자');
+insert into members values('kang', '강감찬',50,'남자');
+insert into members values('sun', '선덕여왕',60,'여자');
+
+commit ;
+
+create sequence seqboard ;
+drop table boards;
+create table boards(
+	no number,
+	title varchar2(20),
+	writer  varchar2(20),
+	content varchar2(20),
+	regdate date default sysdate,
+	hitcount number
+);
+
+alter table boards
+add constraint boards_writer_fk
+foreign key (writer) references members(id )
+on delete set null ;
+
+insert into boards(no, title, writer, content, regdate, hitcount )
+values(seqboard.nextval, '하하하', 'hong', '잼있어요', sysdate, 5 ) ;
+insert into boards(no, title, writer, content, regdate, hitcount )
+values(seqboard.nextval, '호호호', 'hong', '그래요', sysdate, 10 ) ;
+insert into boards(no, title, writer, content, regdate, hitcount )
+values(seqboard.nextval, '사랑해', 'park', '질투나요', sysdate, 3 ) ;
+insert into boards(no, title, writer, content, regdate, hitcount )
+values(seqboard.nextval, '미워해', 'park', '짜증나요', sysdate, 12 ) ;
+insert into boards(no, title, writer, content, regdate, hitcount )
+values(seqboard.nextval, '시러해', 'park', '웃겨요', sysdate, 8 ) ;
+insert into boards(no, title, writer, content, regdate, hitcount )
+values(seqboard.nextval, '송해', 'park', '즐기세요', sysdate, 4 ) ;
+commit ;
+
+
+drop table products purge ;
+create table products(
+	pno number,
+	pname varchar2(20),
+	stock number, 
+	price number
+);
+
+insert into products(pno, pname, stock, price) values(1, '사과', 10, 1000) ;
+insert into products(pno, pname, stock, price) values(2, '배', 20, 2000) ;
+insert into products(pno, pname, stock, price) values(3, '감', 30, 3000) ;
+
+drop sequence seqoid ;
+create sequence seqoid start with 1 increment by 1 nocache ;
+drop table orders purge ;
+
+create table orders(
+  oid number primary key,
+  mid varchar2(10) references members(id ) on delete set null,
+  pno number, 
+  qty number
+);
+insert into orders(oid, mid, pno, qty) values(seqoid.nextval, 'park', 1, 10) ;
+insert into orders(oid, mid, pno, qty) values(seqoid.nextval, 'park', 2, 20) ;
+insert into orders(oid, mid, pno, qty) values(seqoid.nextval, 'kim', 3, 30) ;
+insert into orders(oid, mid, pno, qty) values(seqoid.nextval, 'kim', 4, 40) ;
+commit ;

@@ -1,0 +1,23 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ include file="./../common/common.jsp" %>    
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>box-flex 속성으로 비율로 크기 조정하기</title>
+		<meta charset="UTF-8">
+		<style type="text/css">
+		
+		</style>
+	</head>
+
+	<body>
+		<h1>Graphic</h1>
+		<ul>
+			<li class="red">Photoshop</li> 
+			<li class="indigo">3D Max</li>   
+			<li class="goldenrod ">Rhino</li> 
+			<li class="olive ">Web Editor</li> 
+		</ul>
+	</body>
+</html>

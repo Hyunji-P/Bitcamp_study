@@ -1,0 +1,142 @@
+[오전 수업]
+1. menuHorizintal.jsp 생성(34쪽)
+   
+   display : 메뉴바 보이는 형식 지정 	
+	inline : 가로
+
+   메뉴바가 떨어지게 하는 것 : ul과 li 중첩 
+
+    strong : 매우 중요한 
+
+2.  menuVertical.jsp 생성(35쪽)
+
+3. float00.jsp 생성(36쪽)
+ 
+37쪽 ~ 38쪽은 소스코드로 참고 
+
+4. displayBlock01.jsp(39쪽) 
+      
+   display : 메뉴바 보이는 형식 지정 	
+	inline : 가로 (inline 형태)
+               block : 세로 (block 형태)
+
+5. displayInline01.jsp(40쪽)
+
+6. column01.jsp(42쪽)
+
+    text-align속성
+    justify : 행의 끝을 나란히 맞추다
+
+   w3schools 
+   column-rule 검색 
+   
+  column-count:3; - 다단 숫자
+  column-gap: 20px; - 다단과 글자 사이 gap 
+  column-rule: 2px dashed #FFA07A; - 다단 두께 , 모양 지정 
+
+7. boxFlex01.jsp (43쪽) 
+   소스코드 복사 후 웹브라우저에서 열기 
+
+   box-flex : 1.0 - 전체 10% 
+   box-flex : 2.0 - 전체 20% 
+
+   /* 상단의 좌우측만 둥글게 라운딩 */
+   border-top-left-radius:20px;
+   border-top-right-radius:20px;
+
+   * 참고 ) vender prefix 
+     → html5로 가면서 크롬 , 사파리 등 잘 적용이 안될 수도 있으니
+         vender 별로 구분을 하기위한 접두사  
+   -moz-box-flex:1.0; /* Firefox */
+   -webkit-box-flex:1.0; /* Safari and Chrome */
+
+
+8. 그라데이션 
+      w3schools 
+      CSS Gradients 검색 
+
+     background-image 속성 
+     Linear Gradients (goes down/up/left/right/diagonally) - 선형
+     Radial Gradients (defined by their center) - 방사형 
+
+    트렌지션 
+    CSS Transitions
+    ex) 파워포인트 슬라이드쇼 
+
+    transition: width 2s; → 마우스를 대면 슬라이드 효과 
+
+    트렌스폼
+    transform 
+    변형과 관련 
+    
+ ------------------------------------------------------------------------------------------------------
+9.    w3schools 
+      자바스크립트 
+
+      - 웹페이지의 프로그래밍 동작을 하기 위해 
+      - 유효성 검사 체크 
+
+       Browser Object Model
+       자바스크립트도 object 가 있음 - window 객체 
+ 
+       jquery : 자바스크립트 + css 를 기반으로 한 라이브러리 
+
+10. chap04.js 폴더 생성 
+     basicFunc.jsp 생성 
+     	alert() , confirm() , prompt() 함수 
+
+     <script> 태그 
+
+      * alert() : 팝업 메세지 나오게끔 , 확인(OK 버튼만 가능) 메세지 박스
+        var = int , String (변수) 
+
+      * confirm() : 예 / 아니오 버튼을 보여주는 메세지 박스 
+
+      * prompt() : 팝업 메세지에 텍스트를 입력하는 입력 상자 
+
+      * ★ document : property 변수 , method 함수 
+        document.write(table) : html 문서에 출력해라. 
+
+       Finding HTML Objects 참고 
+
+
+[오후 수업]
+11. windowExam.jsp 
+     이벤트 , 함수 사용법 
+     popup01.jsp ~ popup04.jsp
+
+      새창 띄우기 
+      window.open('popup01.jsp' , 'sometitle' , myoptions);
+      statusbar=yes : 상태바 
+      'sometitle' : 별칭 
+
+     syntax
+      window.open(URL, name, specs, replace)
+      window.close() - close the current window
+
+     * 이벤트 
+      onclick 속성 : 클릭을 했을 때 
+
+      
+     자바 스크립트 : 함수 (= 이벤트 핸들러) 
+     자바 : 메소드 
+
+     mywin.document.close();/* 문서 편집 종료 */
+     mywin.close(); /* 창 닫기 */
+
+
+     정중앙에 넣을 때
+     window > screen
+
+
+12. start.jsp , end.jsp 
+	자식 창의 산술 연산 
+
+    호출 받은 창에서 연산을 한 뒤에 다시 넘겨줌 
+
+    Number( ) : 숫자 형식으로 바꿔주는 함수 
+
+    자바스크립트는 모든 영역을 배열로 취급하려는 영향이 있음 
+    document.forms[0]  : myform은 0번째 
+
+    

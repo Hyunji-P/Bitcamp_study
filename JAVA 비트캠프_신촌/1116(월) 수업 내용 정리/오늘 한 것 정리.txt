@@ -1,0 +1,350 @@
+1. 관리자 세션에서 철수와 영희 계정을 생성한다. 
+
+create user soo identified by soo123
+quota unlimited on users
+account unlock;
+
+create user hee identified by hee456
+quota unlimited on users
+account unlock;
+
+2. 철수 세션 아이콘을 생성하려고 할때 에러발생
+create session 권한 부족으로 접속 불가능 
+관리자가 부여를 해줘야함 
+
+3. 철수와 영희에게 로그인 권한을 준다.
+grant create session to soo , hee;
+
+4. 철수 세션 아이콘 생성 가능 
+
+5. 영희에 대한 접속 아이콘을 생성가능 
+
+
+6. 테이블을 만들때 테이블이 들어갈수있도록 공간을 만들어준다. 
+관리자 세션
+alter user soo default tablespace users;
+alter user hee default tablespace users;
+
+7. 테이블 스페이스가 잘 만들어 졌는지 확인한다. 
+select username , default_tablespace 
+from dba_users
+order by username;
+
+8. 테이블이 잘 만들어진 것을 확인을 했고 
+철수 테이블에서 테이블을 생성해보자.
+
+create table employees(
+	id varchar2(20) ,
+	name varchar2(30),
+	salary number 
+);
+
+9. 철수 테이블에서 새성하려고 하니  insufficient privileges 권한 부족 오류 메세지나옴
+
+10. 관리자에서 철수 사용자에게 테이블을 만들 수 있도록 권한을 줘야함 
+관리자 세션
+grant create table to soo , hee;
+
+11. 철수 사용자에서 테이블을 다시 만들어보자.
+create table employees(
+	id varchar2(20),
+	name varchar2(30),
+	salary number
+);
+
+12. 테이블 값 넣기 
+insert into employees values('hong' , '홍길동' , 100);
+insert into employees values('kim' , '김유신' , 100);
+insert into employees values('lee' , '이순신' , 100);
+commit; --> dml 실행후 반드시 commit과 rollback 을 해야함 
+
+13. 영희 사용자에도 똑같이 테이블과 테이블 값을 넣어준다.
+
+create table employees(
+	no number primary key,
+	name varchar2(30),
+	income number(10,2)
+);
+
+insert into employees values(10,'윤봉길',555);
+insert into employees values(20,'김구',666);
+insert into employees values(30,'이봉창',777);
+
+14. 철수에서 영희의 employees 테이블을 조회해보자.
+철수 세션
+select * from hee.employees;
+
+15. -- 오류 : "table or view does not exist"
+오타이거나 select로 조회할수있는 권한이 없을 때 발생하는 메세지
+
+현재는 조회권한이 없기때문에 뜨는 오류메세지이다.
+
+16. 영희가 철수에게 자기자신의 테이블을 조회할수 있게끔 권한을 부여해준다.
+영희 세션 
+grant select on employees to soo;
+
+17. 철수는 영희에게서 테이블을 조회할수 있는 객체 권한을 받았다.
+조회해보자.
+철수 세션
+select * from hee.employees; --> 성공 
+
+18. 그러면 반대로 철수의 employees 테이블을 영희가 조회할수있도록 해보자.
+grant select on employees to hee;
+
+19. 영희세션에서 철수 테이블을 조회해보자.
+select * from soo.employees;
+
+
+20 . (문제) 철수과 영희에 대하여 각각 employees 테이블에 대하여 사원들의 이름만 보여주는 view 를 만들어보세요.
+
+21. 관리자 세션에서 뷰 생성 권한을 부여 받아야함.
+grant create view to  soo , hee;
+
+22. 철수 세션에서 이름만 보여주는 view를 생성하자.
+create or replace view sooview
+as
+select name from employees;
+
+23. view 는 만들어 졌지만 영희가 철수의 view 를 조회하지 못한다.
+따라서 , 철수는 영희에게 view 를 조회할수있는 객체 권한을 부여한다.
+
+grant select on employees to hee;
+
+24. 영희 세션에서 철수 view 를 조회해보자..
+select * from hee.heeview;
+
+25. 그럼 반대로 영희세션에서 뷰를 생성해보자.
+create or replace view heeview
+as
+select name from employees;
+
+26. 마찬가지로 영희 뷰를 철수가 바라보지못함 
+따라서 , 영희는 철수에게 객체 조회 권한을 준다. 
+grant select on employees to soo;
+
+27. 철수 세션에서 영희 뷰를 조회해보자.
+select * from hee.heeview;
+
+
+-----------------------------------------------------------------------------
+사용자 변경 
+
+sqldeveloper에서 비밀번호 변경은 불가 
+따라서 command 창에서 실행해야함..
+
+
+1. 철수가 비밀번호를 잊어버리다.
+2. 관리자는 비번을 바꿔주고 , 로그인 시 비번을 수정하도록 해야한다.
+3. 철수는 바뀐 비번으로 로그인하고 , 신규 비번을 입력해야한다.
+
+-->
+
+1. 관리자 세션
+관리자도 철수 비밀번호를 모르니까 임시비밀번호를 만들어주는 과정임 
+alter user soo identified by a1234 password expire;
+
+expire : 암호 만기 옵션
+이번까지만 사용가능하니 다른 암호를 사용해야함
+
+2. 철수 세션
+접속 해제 후 다시 재접속 하고 
+우클릭 > 속성에서 비밀번호 a1234를 입력하면 변경이 불가능하다.
+따라서 신규 비번을 만들어줘야함
+
+3. 관리자 세션
+sql developer 에서 신규 비번입력이 안되므로 
+
+alter user soo identified by soo789;
+
+4. 철수 
+우클릭> 속성 > 비밀번호 soo789로 변경 
+
+사용자 삭제
+
+
+----------------------------------------------------------------
+with admin option 순서 
+이 옵션을 부여하면 
+각 사용자끼리 권한 부여가 가능함
+
+하지만 revoke 로 권한을 박탈하면
+해당하는 사용자만 박탈되고 나머지 이미 권한이 부여된 사용자는 권한사용이 가능함
+
+
+1. 관리자가 철수에게 테이블 생성 권한을 with admin option 과 함께 부여한다.
+2. 철수는 이것을 영희에게 부여할수 있다.
+3. 관리자는 철수에게 테이블 생성권한을 박탈한다.
+4. 이후 어떻게 되는지 볼것 
+
+-->
+
+1. 아까전에 soo , hee에게 테이블 생성권한을 부여했움
+ 관리자가 다시 뺏어보도록 함
+
+revoke create table from soo , hee;
+
+2. with admin option 권한주기
+grant create table to soo with admin option;
+
+
+3. 철수 세션에서 테이블을 생성해보자
+create table test01(id varchar2(10));
+
+4. 철수가 부여받은 권한을 보자
+select * from user_sys_privs;
+
+5. 영희에게 create table 권한을 부여하자.
+철수 세션
+grant create table to hee ;
+
+6. 영희 세션에서 테이블을 생성해보자.
+create table test02(id varchar2(10));
+
+7. 관리자 세션에서 철수의 create table 권한을 박탈해보자.
+관리자 세션
+revoke create table from soo;
+
+8. 철수 세션에서 다시 테이블 생성해보기
+create table test03(id varchar2(10)); -->오류
+
+9. 영희 세션에서 다시 테이블 생성해보기
+create table test04(id varchar2(10)); -->생성 
+
+
+---------------------------------------------------------
+[객체 권한 순서]
+
+1. 철수가 영희에게 employees 의 salary 컬럼을 수정할수 있는 객체 권한을 부여해라.
+철수세션
+grant update(salary) on employees to hee;
+
+
+2. 영희 세션에서 급여가 바뀌었는지 테이블 조회하기
+update soo.employees set salary = 1234;
+commit;
+
+3. 급여가 바뀌었는지 철수 세션에서 확인한다.
+select * from employees;
+
+4. 내가 부여해준 객체 권한 확인하기
+select * from user_col_privs_made;
+
+
+---------------------------------------------------
+
+1. 철수가 영희에게 조회 권한을 부여한다.
+grant select on employees to hee;
+
+2. 영희 세션에서 철수의 employees 테이블을 조회한다.
+select * from soo.employees; --> 성공 
+
+3. 영희 세션에서 hr 사용자에게 select 권한을 부여해보자.
+grant select on soo.employees to hr; --> 실패 
+
+4. 철수 세션에서 with grant option 객체 권한을 부여할수있는 옵션을 줘보자.
+grant select on employees to hee with grant option ;
+
+5. 다시 영희 세션에서 hr 사용자에게 select 권한을 부여하자.
+grant select on employees to hee with grant option ; --> 성공
+
+
+---------------------------------------------------------------------------
+롤(role)
+권한을 하나로 묶어 놓는 집합체(collection , bottle) 개념
+
+
+---관리자 세션 내용
+1. 관리자 세션에서 신규 사용자 곰돌이를 생성하고 , 롤을 이용하여 권한을 부여하세요.
+관리자 세션
+create user gomdori identified by oracle
+quota 1m on users
+account unlock;
+
+alter user gomdori default tablespace users;
+2. 롤 생성하기
+create role gom_role;
+
+-- 시스템 권한 부여--
+3. 곰돌이에게 접속권한 , 테이블 생성 , 뷰 생성 , 롤 생성 권한을 부여하려고 한다.
+grant create session , create table , create view , create role to gom_role;
+
+4. gom_role 롤 권한 부여 
+grant gom_role to gomdori;
+
+5. 롤확인을 위한 사전
+수여자가 곰돌이인 롤의 내용들을 조회하기 
+꼭 대문자로 조회할것 
+select * from dba_role_privs where grantee = 'GOMDORI';
+
+6. gom_role 에 들어있는 권한들의 내용 보기 
+select * from role_sys_privs where role = 'GOM_ROLE';
+
+-- 곰돌이 세션에서 권한이 제대로 부여되었는지 확인할 것 
+
+7. 곰돌이 세션에서 employees 테이블을 생성한다.
+create table employees(
+	id varchar2(10) , name varchar2(30) , jumsu number
+);
+
+
+
+insert into employees values('kim','김유신',85);
+insert into employees values('lee','이순신',70);
+commit;
+
+8. 영희에게 employees 테이블을 조회 , 추가 , 수정 , 삭제 등의 기능을 수행하기 위하여 롤을 생성하고 해당 롤을 
+영희에게 수여한다.(객체 권한 부여)
+
+create role emprole;
+
+9. 권한부여하기 
+grant select on employees to emprole;
+grant update on employees to emprole;
+grant insert , delete on employees to emprole;
+
+
+10. hee한테 권한 넘기기 
+grant emprole to hee;
+
+
+11. 영희 세션을 재접속 한다음에 객체 권한이 수행되는지 확인해보자.
+select * from gomdori.employees;
+
+insert into gomdori.employees values('shin', '신사임당' , 60);
+commit;
+
+update gomdori.employees set jumsu = 100;
+commit;
+
+delete from gomdori.employees where id = 'lee';
+commit;
+
+12. 곰돌이 세션에서 employees 테이블을 확인해보쟈.
+
+select * from employees;
+
+13. 해당 롤에게 부여되었던 dml문장들을 모두 박탈한다. 
+revoke insert , delete , update on employees from emprole;
+
+14. 영희 세션 재접속 이후 
+insert into gomdori.employees values('an', '신사임당' , 60);
+commit; -> 오류 
+
+
+---------------------------------------------------------------
+데이터 사전 내용 조회하기
+
+desc dict;
+
+-- 관련 사전 조회하기
+select * from dict
+where table_name like '%PRIVS%'
+order by table_name;
+
+
+
+
+
+
+
+

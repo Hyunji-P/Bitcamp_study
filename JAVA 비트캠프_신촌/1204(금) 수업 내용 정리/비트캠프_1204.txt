@@ -1,0 +1,117 @@
+[오전 수업]
+
+1. sample01.jsp
+
+자바 스크립트 + css 기반으로 라이브러리 형태 : jquery
+
+fade : 서서히 사라졌다가 나타나는 것 
+
+jquery effects - hide and show 
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+// 이 코딩에 ready() , hide() , show()등 함수가 모두 들어있음 
+// jquery.min.js : 코딩하다보면 주석이 엄청 많이 달리는데 그 주석을 없애고 축소시켜 최소한의 파일을 만들어놓음 
+// jquery.js : 주석 + 코딩 모두 함께 있음 
+<script>
+$(document).ready(function(){ // 문서가 다 로딩 되었을 때 , onload 와 동일 , 반드시 이 안에 코딩해야함 
+  $("#hide").click(function(){
+    $("p").hide();
+  });
+  $("#show").click(function(){
+    $("p").show();
+  });
+});
+</script>
+</head>
+<body>
+
+<p>If you click on the "Hide" button, I will disappear.</p>
+
+<button id="hide">Hide</button>
+<button id="show">Show</button>
+
+</body>
+</html>
+
+
+.magenta{ background-color:magenta ; }/* 클래스 속성이 없기 떄문에 추가(add)하려고 함 */
+---> addClass() ; 사용 
+
+addClass() <-> removeClass() 
+$(selector).addClass(classname,function(index,currentclass))
+
+파일 jquery.min.js 바탕화면 저장 후 js 폴더에 drag & drop 하기 
+<script src="./../js/jquery.min.js"></script> 경로  수정 
+
+2. sample02.jsp 
+   css('속성' , '속성값' ) ; 
+
+   <b> : 굵게 
+
+   html(변수) ; : html에 출력 
+
+   var searchItems = $('p, span , div.simpletext1'); 
+   : 여러개를 목록으로 받을 수 있음 
+     자바스크립트 처럼 배열로 취급함 
+
+   text(변수); : 문자열로 출력  
+
+   each() : 자바의 for 문과 동일
+   $(selector).each(function(index,element))
+
+3. sample03.jsp 
+   <p> : 조부모
+		<em> one  </em> : 자식
+		<em> two  </em> : 자식 
+		<span> : 부모
+			<em> three </em> : 자식 
+		</span>
+   </p>
+
+   -> $('p > em').css('color','red');
+       parent > child 순서임 
+
+   append() : 제일 뒤에 추가하기 
+   $(selector).append(content,function(index,html))
+
+   prepend() : 제일 앞에 추가하기
+
+   : first : 전체에서 첫번째 
+   : first - child : 각 그룹의 첫번째 
+
+   : last : 전체에서 마지막
+   : last - child : 각 그룹의 마지막 
+
+4. sample04.jsp 
+   jquery 에서도 유효성 검사가 가능하다. 
+
+
+[오후 수업]
+5. sample04.jsp 
+element + element : element 바로 뒤에 있는 element
+  
+input:checked : 체크된 것 
+input:not(:checked) : 체크 안된 것 
+
+6. sample05.jsp
+   데이터를 가져올 때 "크롤링" 사용 
+
+7. sample06.jsp 
+
+8. sample07.jsp 
+
+   속성 값 셋팅 
+   $(selector).attr(attribute,value) 
+
+  속성 값 가져오기 
+   $(selector).attr(attribute)
+
+9. sample08.jsp 
+   상태를 다른 상태로 바꾸는 것
+   on , off 등 : toggle 
+
+   toggle을 사용하려면 두개의 클래스를 만들어서 on / off 시킴 

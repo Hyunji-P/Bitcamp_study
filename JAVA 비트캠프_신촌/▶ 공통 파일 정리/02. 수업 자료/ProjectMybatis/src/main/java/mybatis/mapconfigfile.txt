@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<typeAliases>
+		<!-- 타입 별칭 -->
+		<typeAlias alias="MyMember" type="bean.Member" />
+		<typeAlias alias="MyBoard" type="bean.Board" />
+		<typeAlias alias="MyOrder" type="bean.Order" />
+		<typeAlias alias="MyProduct" type="bean.Product" />
+	</typeAliases>	
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<!-- 데이터베이스 출처 설정 -->
+				<property name="driver" value="oracle.jdbc.driver.OracleDriver" />
+				<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe" />
+				<property name="username" value="oraman" />
+				<property name="password" value="oracle" />				
+			</dataSource>
+		</environment>
+	</environments>
+
+	<!-- mapper 태그 사용시 앞에 슬래시 붙이지 말고 패키지 경로 쭉~~~ 파일 이름 명시 -->
+	<mappers>
+		<!-- 매퍼 파일의 경로 지정 -->
+		<mapper resource="mypkg/sample1/mapmember.xml" />
+		<mapper resource="mypkg/sample1/mapproduct.xml" />
+		<mapper resource="mypkg/sample1/mapboard.xml" />
+	</mappers>
+</configuration>

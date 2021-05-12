@@ -1,0 +1,84 @@
+[오전 수업]
+세션에 들어 있는 장바구니 이름 : mycart 
+세션에 들어 있는 로그인 정보 : loginfo 
+
+
+MemberLogoutController 
+로그 아웃시 내 장바구니 정보를 테이블에 저장한다. 
+세션 종료 
+
+MemberLoginController
+로그인 시 WishList 에 데이터가 있으면 읽어 와서 세션에 바인딩 한다. 
+
+* MemberLogoutController  
+
+   회원 관련 세션을 지워야하며, 
+   장바구니 정보를 테이블에 또 저장해야하므로 
+
+   @Autowired 자동주입을 2번 지정한다. 
+
+
+* MemberLoginController
+테스트 시나리오 
+hong  
+상품 1번 10개 
+상품 2번 20개
+
+park 
+상품 1번 5개
+상품 2번 15개 
+----------------------------------------------------------------------------------
+* 회원 가입 하기 
+MemberInsertController
+
+* 에러
+컨트롤러에 해당 페이지만 기재 후 서버 재시작 하면 아래 에러가 뜬다. 
+java.lang.IllegalStateException: Ambiguous mapping. Cannot map 'memberInsertController' method 
+
+* 원인 
+<form:form> 태그를 사용해야하는데 코딩을 안한상태에서 서버를 돌리면 뜨는 오류 메세지 
+
+1) member-config.xml 파일 
+<!-- 메세지 리소스 번들을 위한 Bean -->
+
+2) member.properties 파일 
+
+3) meInsertForm.jsp 
+
+4) 컨트롤러에서 커맨드 객체를 jsp 파일에서 연결하도록 함
+// 커맨드 객체 이름 
+	@ModelAttribute("member")
+	public Member some() {
+		return new Member();
+	}
+
+5)  meInsertForm.jsp  태그 수정 
+<form:form> 태그를 사용하는 이유 
+유효성 검사 에러가 났을때 기존에 입력했던 파라미터 값이 그대로 남아있어야하기때문에 
+사용함
+
+6) 유효성 검사
+
+7) MemberInsertController 컨트롤러 
+	doPost() 
+
+8) meInsertForm.jsp 
+
+9) 체크박스 , 콤보박스 등등 
+MemberDao --GetList( )
+
+10) MemberInsertController 
+aaa()  메소드 
+
+
+statusbar=yes
+커서를 움직일때 하단부에 나오는 상태 값
+
+resizable=no
+크기 조정 불가 
+
+* MemberIdcheckController 
+* MemberZipcheckController 
+
+
+

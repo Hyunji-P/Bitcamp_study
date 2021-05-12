@@ -1,0 +1,95 @@
+[오전 수업]
+
+-pkg : pkg1016
+1.Enum 타입 (enumerate 여러 개 항목이 나열되어 있는)
+
+ex) 신발 종류(type 변수)가 4가지가 있다.
+워킹화(0) , 런닝화(1) , 트래킹화(2) , 등산화(3) ----> 일반적으로 ...배열로 처리
+
+숫자로 접근하려고 하니 , 개발자가 힘들어한다..
+그래서 , 이 숫자들을 기호 상수(symbolic constant) 형태로 표현하면 가독성이 좋아진다.
+데이터의 범위를 한정지음으로 인하여 오류를 미연에 방지 할수 있다.(제한성)
+
+▶ 관련된 변수는 통상적으로 대문자로 많이 사용한다.(c언어의 영향)
+
+
+
+2. 확장(향상)된 for구문 
+	여러 개의 데이터를 하나씩 추출하고자 할때 많이 사용됨
+
+for(타입 단수이름 : 복수이름){
+	출력(단수이름);
+}
+
+3. 메소드 
+values() : enum 요소들의 목록을 반환해주는 메소드
+
+ordinal() : 각 요소가 지닌 순번을 반환해주는 메소드
+
+
+4. 실습
+패키지 : pkgplayer
+Player(I)
+	재생기를 위한 인터페이스
+	void play(); //재생하기
+	void stop(); //재생 중지
+	void fast(); //빨리 감기
+	void reverse(); //역순으로 감기
+
+ExtPlayer(I)
+	재생기를 위한 확장용 인터페이스
+	Player 인터페이스를 상속 받습니다.
+	void slow(); //천천히 감기
+	void autoreverse(); //자동 역순환하기
+
+EnumSkin(E)
+	스킨 관련 색상들을 정의한 Enum 타입
+	색상 : BLACK(0), RED(1), BLUE(2), GREEN(3)
+
+Skinnable(I)
+	스킨을 입히기 위한 인터페이스
+	void changeSking(EnumSkin skin) ; //스킨의 색상 변경하기
+
+DvdPlayer
+	ExtPlayer를 상속 받습니다.
+	제목(title), 상영 시간(showtime_단위 초)
+	makeTime() : 상영 시간을 시분초로 만들어 주는 메소드 구현
+
+DvdPlayer 클래스는 오버라이딩된 모든 메소드를 사용하지 않음에도 불구하고, 무조건 오버라이딩해야 하는 부담이 있습니다.
+그래서, 나온 개념이 Adapter 클래스입니다.
+Adapter 클래스를 미리 구현해두고, 필요한 메소드만 오버라이딩하여 사용합니다. 
+
+PlayerAdapter 클래스
+	Player 인터페이스를 상속 받습니다.
+	makeTime() : 상영 시간을 시분초로 만들어 주는 메소드 구현
+	재생 시간(showtime_단위 초)
+
+Mp3Player
+	이 클래스는 fast()와 reverse() 메소드만 구현하려고 합니다.
+	PlayerAdapter를 상속 받습니다.
+	가수(singer), 노래(title) 
+	PlayerAdapter 클래스의 makeTime()를 사용합니다.
+
+VideoPlayer
+	Skinnable와 PlayerAdapter를 상속 받습니다.
+	제목(title), 등급(grade)
+	PlayerAdapter 클래스의 makeTime()를 사용합니다.
+
+InterfaceTest : 메인 클래스
+
+
+[오후 수업]
+5. DecimalFormat 클래스 
+   엑셀과 같이 사용자서식을 지정해주는 클래스 
+
+   import java.text.DecimalFormat; ---->import 불러옴
+
+   - DecFormat 클래스 
+
+    DecimalFormat  클래스 내부에 format() 메소드 존재
+
+
+
+
+
+

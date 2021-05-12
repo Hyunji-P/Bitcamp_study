@@ -1,0 +1,24 @@
+[오전 수업]
+
+100쪽 
+	Rectangle(I) , RectangleImpl , applicationContext.xml 파일 생성 
+	// <constructor-arg> ==>  constructor : 생성자 , argument : 인자 
+
+102쪽 
+	★ UML  표기법 (추후 공부) 
+	 exam.xmlbeanbind 패키지
+
+	=> 주문 시스템과 배달 시스템이 확장 될 수도 있기 때문에 유지보수를 위해 , 확장성을 위해 
+	     의존 관계로 처리 해야한다. 
+
+103쪽 ~ 106쪽 
+	play.instrument 패키지 
+	105쪽 기준으로 인터페이스 클래스 구현 
+
+
+[오후 수업]
+107쪽 
+	ShapeDao : 스펙만 정의 
+	CircleDao : 실처리 
+
+	Circle <----- CircleDao <---다오 (셋터 인젝션) 처리 

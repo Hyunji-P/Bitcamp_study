@@ -1,0 +1,49 @@
+[오전 수업]
+
+1. meList.jsp 
+
+상단 필드 검색과 페이지 상태 정보 
+
+하단부 <script></script>
+
+2. MemberListController
+
+JSP 는 기본값으로 page 영역에 바인딩 한다. 
+스프링은 기본값으로 request 영역에 바인딩 한다.
+
+★ jsp 파일에서 콤보박스와 키워드를 검색한 항목이 남아있게 하기 위해 
+    하단부 mode , keyword 바인딩 쪽 보기 
+
+=> 양식 폼에서 유효성 검사 에러 시  콤보박스 , 체크박스 , 라디오 버튼 등 
+     이전 자신이 선택했던 값을 남아있게 할때 사용하면 좋을 듯.. 
+
+
+3.MemberUpdateController
+회원 정보 수정 
+
+
+4. MemberDao
+
+
+5. meUpdateForm 백업 
+
+6. common 폴더 > 회원 모듈 관련.txt
+스프링에서 날짜 관련 처리 기법을 찾아 봐야 합니다.(힌트 : @DateTimeFormat 어노테이션)
+
+7. meUpdateForm.jsp 
+
+8. main.jsp 
+
+
+------------------------------------------------------------------------------
+* 인터셉터 설정
+
+1) member-config.xml
+
+2) AfterMemberInsert 클래스 
+인터셉터를 사용하려면 상속을 받아야함 
+
+
+==> 회원가입하면 바로 로그인 되게 처리
+
+

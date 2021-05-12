@@ -1,0 +1,72 @@
+[오전수업]
+
+*숙제 : https://cafe.naver.com/ugcadman/459 - 클레스 숙제 01
+*중첩 for문 , 배열 , 메소드 
+
+*math 수학 메소드 
+- Math.abs() : 절대값 
+- Math.random() : 랜덤값 , 난수 
+
+
+*MethodSum 클래스 
+1. 반환 타입 X  - void 
+
+
+구별) 
+int su = 10;
+int result = hap(su);
+- 메소드 이름 : hap , 매개변수 : 정수형 su 1개 , 반환타입이 있는 
+  result 에 값을 대입한다.
+
+sum(su);
+- 메소드 이름 : sum , 매개변수 : 정수형 su1개 , 왼쪽에 아무것도 없기
+  때문에 반환타입이 없는 void 
+
+
+2. Math.random()
+a이상 b미만의 임의의 난수(랜덤 값) 생성하기 (단, a와 b는 정수) 
+a <= (int)((b-a)*Math.random() + a) < b
+
+
+* 5이상 9미만의 임의의 난수
+random() 메소드는 다음과 같은 성질을 갖는다.
+
+0.0 <= Math.random() < 1.0   
+
+1) 각 변에 (9-5)를 곱한다.
+0.0 <= (9-5)*Math.random() < 4.0
+
+2) 각 변에 5를 더한다. 
+5.0 <= 4*Math.random() + 5 < 9.0
+
+3) 정수형으로 캐스팅 한다.
+5 <= (int)(4*Math.random() + 5) < 9
+
+
+3. ★ 메소드 오버로딩 
+
+메소드가 다중 정의 되었다 = 오버로딩 
+
+오버로딩 : 3 , 메소드 구현 : 3
+- Add(1 , 2); //매개변수 정수 2개 
+
+- Add(3.0 , 4.0);//매개변수 실수 2개
+
+- Add(1 , 2 , 3);//매개변수 정수 3개 
+
+해당 메소드로 직접 : main() 메소드에서  ctrl + 왼쪽 마우스 클릭 
+
+Math 메소드 : 오버로딩 되어 있음 
+
+Math.max(min)(3.2 , 5) ; -> Math.max(min)(3.2 , 5.0) ; 암시적 캐스팅이 되서 가능함
+
+*ex) 배열일 경우 
+int [] arr = {1,2,3,4};
+Math.min(arr[0],arr[1]) ; 사용 가능함  
+
+4. String 클래스 
+(MethodString 클래스)
+
+String str = "gugudan";
+str. 까지 입력하면 수많은 메소드가 나옴 
+

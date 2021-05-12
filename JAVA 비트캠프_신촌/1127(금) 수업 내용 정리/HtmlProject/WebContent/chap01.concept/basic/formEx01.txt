@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>예약 문의</title>
+	<meta charset="UTF-8" />
+
+
+
+	예약 문의
+	<form action="#" method="post">
+		
+			<!-- label 태그는 폼 요소의 제목을 달때 사용하는 것으로 -->
+			<!-- for 속성을 이용하여 id나 name 속성을 지정하며  -->
+			<!-- 서로 떨어져 있는 폼 요소를 연결할 수 있다 -->
+			<label for="userName">작성자 </label>
+			<input id="userName" name="userName" type="text" />
+		
+		
+			<label for="userPWD">비밀번호</label>
+			<input id="userPWD" name="userPWD" type="password" />
+		
+		
+			<label for="userTitle">제목</label>
+			<input id="userTitle" name="userTitle" type="text" />
+		
+		
+			<label for="userEmail">이메일</label>
+			<input id="userEmail" name="userEmail" type="email" />
+		
+		
+			<label for="userPhone">연락처</label>
+			<input id="userPhone" name="userPhone" type="tel" />
+		
+		
+			<label for="userDate">투숙 날짜</label>
+			<input id="userDate" name="userDate" type="date" />
+		
+		
+			<label for="userNumber">투숙 인원</label>
+			<input id="userNumber" name="userNumber" type="number" />
+				
+		
+			예약하실 객실을 선택하세요.<br>
+			<label>
+				<input name="userRoom" type="radio" value="Single" checked />Single
+			</label>
+			/
+			<label>
+				<input name="userRoom" type="radio" value="Double" />Double 
+			</label>
+			/
+			<label>
+				<input name="userRoom" type="radio" value="Twin" />Twin
+			</label>
+			<br>
+			<input name="btn_gogllery" type="image" src="./../images/btn_gallery.gif" alt="방 둘러보기">
+		
+		
+			<label>색상 선택 <input type="color" name="userColor" /></label>
+		
+		
+		<label>평점 <input type="range" name="userPoints" min="1" max="10" step="1" value="5" /></label>
+				
+		
+			기타 패키지 옵션을 선택하세요<br>
+			<label>
+				<input name="userOption1" type="checkbox" value="조식" checked />조식
+			</label>
+			<label>
+				<input name="userOption2" type="checkbox" value="바베큐" />바베큐
+			</label>
+			<label>
+				<input name="userOption3" type="checkbox" value="픽업 서비스" />픽업 서비스
+			</label>
+		
+		
+			작성자의 신원을 파악하기 위한 사진을 올려주세요.<br>
+            <input name="userFile" type="file" />
+        
+		
+			<input name="btn1" type="submit" value="전송" />
+			<input name="btn2" type="reset" value="취소" />
+			<input name="btn3" type="button" value="이전 페이지" />
+		
+	</form>
+

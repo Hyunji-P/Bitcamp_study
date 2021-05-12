@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="NsMember">
+	<delete id="DeleteData" parameterType="String">
+		delete from members where name=#{name}
+	</delete>
+	
+	
+	<update id="UpdateData" parameterType="MyMember">
+		update members set age=#{age}, gender=#{gender}
+		where name=#{name}
+	</update>	
+	
+	<insert id="InsertData" parameterType="MyMember" >
+		insert into members 
+		values( #{name}, #{age}, #{gender} )
+	</insert> 
+	
+		
+		
+		
+	<select id="GetMemberByName" parameterType="String" resultType="MyMember">
+		select * from members where name = #{name}
+	</select>
+	
+	
+	
+	<select id="GetMemberList" resultType="MyMember">
+    	select * from members order by name asc
+  	</select>
+  	
+  	
+  	
+  	
+  	
+  	<select id="SelectTopN" resultType="MyBoard">
+		select no, title, writer, content, regdate, hitcount
+		from boards
+		order by no desc  
+  	</select>
+  	
+  	
+	<select id="JoinGet3Way" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select m.name, p.pname, p.price, o.qty, p.price * o.qty as amount  
+		from (members m inner join orders o
+		on m.name = o.name) inner join products p 
+		on o.pno = p.pno 
+	</select>  	
+	
+	<resultMap id="MemberBoardCollection" type="MyMember">
+		<id column="id"  property="id" />
+		<id column="name"  property="name" />
+		<result column="age" property="age" />
+		<result column="gender" property="gender" />
+		<collection property="boardBeans" ofType="MyBoard">
+			<id property="no" column="no" />
+			<result property="title" column="title" />
+			<result property="writer" column="writer" />
+			<result property="content" column="content" />
+			<result property="regdate" column="regdate" />
+			<result property="hitcount" column="hitcount" />			
+		</collection>
+	</resultMap>	
+	
+	<select id="GetJoinList" parameterType="String" resultMap="MemberBoardCollection">
+		select * 
+		from members m inner join boards mb
+		on m.id = mb.writer
+	</select>  	
+	
+	
+	<select id="IfCondition"  resultType="MyMember" parameterType="hashmap">
+		select *
+		from members
+		<if test="name != null">
+			where name = #{name}
+		</if> 
+	</select>
+	
+	<select id="Foreach1" resultType="MyMember">
+		select *
+		from members
+	   	where name in
+	   	<foreach item ="item" index="index" collection="array" open="(" separator="," close=")">
+	         #{item}
+	   	</foreach>
+	</select>
+	
+	<select id="Foreach2" resultType="MyMember">
+		select *
+		from members
+	   	where name in
+	   	<foreach item ="item" index="index" collection="list" open="(" separator="," close=")">
+	         #{item}
+	   	</foreach>
+	</select>	
+</mapper>

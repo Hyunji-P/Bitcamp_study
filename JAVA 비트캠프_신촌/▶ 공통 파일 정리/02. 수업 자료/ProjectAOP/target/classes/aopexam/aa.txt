@@ -1,0 +1,20 @@
+  
+
+ C:\Users\jinugi\eclipse-workspace200\ProjectAOP\src\main\java\aopexam\sample03 디렉터리
+
+[.]              [..]             aopExam.txt      aopExam.xml
+AopMain.java     Board.java       BoardImpl.java   DAO.java
+Login.java       Logout.java      Order.java       OrderImpl.java
+sample3.txt      
+              11개 파일               5,799 바이트
+
+ C:\Users\jinugi\eclipse-workspace200\ProjectAOP\src\main\java\aopexam\sample04 디렉터리
+
+[.]              [..]             aopExam.txt      aopExam.xml
+AopMain.java     Board.java       BoardImpl.java   DAO.java
+Login.java       Logout.java      Order.java       OrderImpl.java
+              10개 파일               4,627 바이트
+
+     전체 파일:
+              31개 파일              13,339 바이트
+              14개 디렉터리   6,702,075,904 바이트 남음

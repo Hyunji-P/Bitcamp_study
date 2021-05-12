@@ -1,0 +1,35 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ include file="./../common/common.jsp" %>    
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>조건에 반대되는 엘리먼트 검색하기-:not()</title>
+	<script type="text/javascript">
+
+	
+	
+		$(document).ready(function() {
+			
+		});
+	</script>
+</head>
+<body>
+	<div>
+		<input type="checkbox" name="fruit" /><span>사과</span>
+	</div>
+	<div>
+		<input type="checkbox" name="fruit" /><span>바나나</span>
+	</div>
+	<div>
+		<input type="checkbox" name="fruit" checked="checked" /><span>오렌지</span>
+	</div>
+	<hr>
+	<span id="simpletext1">simple</span>
+	<span class="simpletext2">jQuery</span>
+	<span id="complextext1">basic</span>
+	<span id="complextext2">example</span>
+	<span id="complex">book</span>
+</body>
+</html>

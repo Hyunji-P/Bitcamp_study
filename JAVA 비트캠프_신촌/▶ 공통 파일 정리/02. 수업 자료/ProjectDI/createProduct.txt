@@ -1,0 +1,35 @@
+drop table products purge ;
+
+create table products(
+	prodid number(5) primary key,
+	pname varchar2(20),
+	price number(20),
+	description varchar2(255),
+	pictureurl varchar2(20)
+);
+
+drop sequence seqproducts;
+create  sequence seqproducts;
+
+insert into products 
+values(seqproducts.nextval,'레몬', 300,'레몬에 포함되어 있는 쿠엔산은 피로회복에 좋습니다. 비타민C도 풍부합니다.','lemon.jpg');
+insert into products 
+values(seqproducts.nextval,'오렌지', 2000,'비타민C가 풍부합니다. 플래쉬 쥬스도 추천합니다.','orange.jpg');
+insert into products 
+values(seqproducts.nextval,'키위', 300,'비타민C가 매우 풍부합니다. 다이에트와 미용에도 매우 좋습니다.','kiui.jpg');
+insert into products 
+values(seqproducts.nextval,'파란사과', 500,'단맛이 강한 향기가 상큼한 파란 사과입니다.','aoringo.jpg');
+insert into products 
+values(seqproducts.nextval,'블루베리', 500,'블루베리에 포함된 anthocyanin(안토시아닌)은 눈피로에 효과가 있습니다.','blueberry.jpg');
+insert into products 
+values(seqproducts.nextval,'체리', 1000	,'체리는 맛이 단 성분이 많고 피로회복에 잘 듣습니다.','sakuranbo.jpg');
+insert into products 
+values(seqproducts.nextval,'메론', 1000	,'메론에는 비타민A와 칼륨이 많이 포함되어 있습니다.','melon.jpg');
+insert into products 
+values(seqproducts.nextval,'수박', 2000,'수분이 풍부한 작인 수박입니다.','suika.jpg');
+insert into products 
+values(seqproducts.nextval,'파인애플',2000, '비타민B1 비타민B2가 풍부합니다. 요리에도 사용할 수 있습니다.','pine.jpg');
+
+commit;
+
+select * from products ;

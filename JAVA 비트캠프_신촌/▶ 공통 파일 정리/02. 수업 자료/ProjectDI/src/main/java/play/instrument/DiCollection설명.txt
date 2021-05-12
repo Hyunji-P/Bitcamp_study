@@ -1,0 +1,28 @@
+xml 파일 생성 : collection.xml
+메인 시작 프로그램 : CollectionMain(main 메소드 있음)
+
+Instrument 인터페이스
+	악기를 의미하는 인터페이스	
+	play() 메소드 : 악기를 연주하기 위한 메소드
+Guitar
+	기타 클래스(Instrument 인터페이스를 상속 받는다.)
+Harmonica
+	하모니카 클래스(Instrument 인터페이스를 상속 받는다.)
+Piano	
+	피아노 클래스(Instrument 인터페이스를 상속 받는다.)
+	
+Performer 인터페이스
+	연주가, 수행가 등등 뭔가 자신의 재능을 뽐내기 위한 인터페이스
+	perform() 메소드 : 연주를 수행하다.
+OneManBand 클래스
+	멤버가 한 사람인 밴드
+	여러 개의 악기를 연주할 수 있는 클래스
+	Performer 인터페이스를 상속 받고 있다.
+	컬렉션 중에서 Set, List에 사용 가능한 예시이다.	
+OneManBandMap 클래스
+	OneManBand 클래스와 동일하다.
+	컬렉션 중에서 Map에 사용 가능한 예시이다.	
+OneManBandProp 클래스
+	OneManBand 클래스와 동일하다.
+	컬렉션 중에서 Properties에 사용 가능한 예시이다.
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

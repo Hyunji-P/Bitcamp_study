@@ -1,0 +1,81 @@
+[오전 수업]
+
+*Ans24 클래스
+
+1. Scanner 클래스 
+   nextInt() : 메소드
+ 
+	1) import java.util.Scanner; 
+	    : scanner 클래스는 자주 사용하지 않아 따로 외부에서 scanner 클래스를 불러오겠다.
+
+	2) Scanner scan = new Scanner(System.in);
+	    : 키보드로 입력 받을 수 있도록 scan이라는 새로운 스캐너를 생성하겠다.
+
+	3) int size = scan.nextInt(); 
+	    : 키보드로 입력했을 때 값을 정수형 size라는 변수에 데이터를 저장하겠다.
+
+* SwapExam 클래스
+
+2.배열에서 Swap 기법 : 임시변수를 사용하여 서로 swap 바꿔줌 
+int x = 3 , y = 4;
+int temp ;
+
+temp = x ; 
+x = y ;
+y = temp; 
+
+
+
+// 문제) 배열 요소들의 값을 거꾸로 뒤집어서 출력하시오.
+// 배열 요소들을 swap 기법을 이요항 값들을 서로 맞 바꾸면 된다.
+int[] arr = { 1, 2, 3, 4 }; → int [] arr = {4, 3, 2, 1} ;
+
+int cnt = arr.length / 2; // swap 횟수
+System.out.println("배열 요소 뒤집기");
+
+for (int i = 0; i < cnt; i++) {
+	temp = arr[i];
+	arr[i] = arr[arr.length - 1 - i]; 
+	//★ i = arr.length(배열크기) - 1 → 0 = arr.length(배열크기) - 1 - i 
+	arr[arr.length - 1 - i] = temp;
+}
+ex ) temp = arr[0];
+      arr[0] = arr[3];
+      arr[3] = temp;
+
+
+3. 다차원 배열 
+ArrayExam5 
+
+
+
+[오후 수업]
+자바 교안 참고 
+4. 메소드 (Method01)
+
+y = 2*x1 + 3*x2 -3
+x1 = 3
+x2 = 2
+y = ?
+
+x1 = 2
+x2 = 5
+y =?
+
+
+* 형식 매개변수와 실 매개변수의 이름은 달라도 되지만
+  개수와 데이터 타입은 동일해야한다. 
+
+*메소드는 main 메소드와 동급 레벨에서 적어야지 됨 
+main메소드 안에 적으면 오류 
+
+*() 소괄호가 나오면 무조건 메소드
+
+*math 수학 메소드 공책 따로 정리 할 것 
+ 1)Math.signum() : 값이 0 ,  1 , -1을 나타내는 수학 메소드(부호판단)
+ 2)Math.min(x,y) : 최소값을 나타내는 수학 메소드
+ 3)Math.max(x,y) : 최대값을 나타내는 수학 메소드
+ 4)Math.pow(x,y) : x의 y제곱 
+
+*메소드가 여러개 일때 안에 있는 결과값을 저장하는 변수이름은 같아도 되지만 
+ 안에 내용물은 서로 다름 

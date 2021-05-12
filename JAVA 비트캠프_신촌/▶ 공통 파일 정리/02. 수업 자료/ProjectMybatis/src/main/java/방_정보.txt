@@ -1,0 +1,91 @@
+-- drop table Rooms ; 
+-- drop sequence roseq ; 
+create sequence roseq ;
+
+create table Rooms(  
+   rono  number primary key,
+   bname varchar2(150) unique,
+   btype varchar2(50),
+   maxp number,
+   price number,
+   image1 varchar2(200) default 'noimage.jpg',
+   image2 varchar2(200) default 'noimage.jpg',
+   image3 varchar2(200) default 'noimage.jpg',
+   comments varchar2(1000) default ' '
+);
+
+insert into Rooms(rono, bname, btype, maxp, price, comments)
+values(roseq.nextval, '덕선이', '스파', 3 , 50000, '커플룸');
+
+insert into Rooms(rono, bname, btype, maxp, price, comments)
+values(roseq.nextval, '택이', '기본', 5, 70000, '가족룸');
+
+insert into Rooms(rono, bname, btype, maxp, price, comments)
+values(roseq.nextval, '정환이', '스파', 7, 90000, '가족룸');
+
+insert into Rooms(rono, bname, btype, maxp, price, comments)
+values(roseq.nextval, '정봉이', '기본', 9, 110000, '대가족룸');
+
+insert into Rooms(rono, bname, btype, maxp, price, comments)
+values(roseq.nextval, '동룡이', '기본', 3 , 50000, '커플룸');
+
+insert into Rooms(rono , bname, btype, maxp , price, comments)
+values(roseq.nextval, '선우', '스파', 15, 130000, 'MT룸');
+
+commit;
+
+
+-- drop table reservations ;
+-- id는 회원의 포린키
+-- bname은  방의 포린키
+-- price은  방의 포린키
+
+-- drop sequence rvseq ; 
+create sequence rvseq ;
+create table reservations(
+   rvno number primary key,
+   id varchar2(50),
+   bname varchar2(150) ,
+   price number,
+   rono number null,   
+   startDate date not null,
+   endDate date not null,   
+   rvDate date  not null,
+   addtionalService varchar2(50),   
+   arrivalTime varchar2(50),
+   theOther varchar2(50),
+   rvName varchar2(50)
+   
+);
+
+alter table reservations
+add constraint aaa 
+foreign key(id) references members(id)
+on delete set null ;
+
+alter table reservations
+add constraint bbb 
+foreign key(rono ) references Rooms(rono ) ;
+
+
+alter table reservations
+add constraint eee 
+foreign key(bname ) references Rooms(bname ) ;
+
+
+insert into reservations( rvno, id,bname,price,startDate, endDate, rvDate, addtionalService,  arrivalTime, theOther, rvName )
+values (rvseq.nextval,'hong','정봉이',110000,'2016/01/01','2016/01/05', '2016/01/01', '픽업','오후3시','없음','홍길동');
+
+insert into reservations( rvno, id,bname,price,startDate, endDate, rvDate, addtionalService,  arrivalTime, theOther, rvName )
+values (rvseq.nextval,'park','덕선이',50000,'2016/01/04','2016/01/08', '2016/01/01', '픽업','오후3시','없음','박영희');
+
+insert into reservations( rvno, id,bname,price,startDate, endDate, rvDate, addtionalService,  arrivalTime, theOther, rvName)
+values (rvseq.nextval,'hong','선우',130000,'2016/02/01','2016/02/05', '2016/01/01', '픽업','오전11시','없음','홍길동');
+
+insert into reservations( rvno, id,bname,price,startDate, endDate, rvDate, addtionalService,  arrivalTime, theOther, rvName)
+values (rvseq.nextval,'park','정환이',90000,'2016/02/01','2016/02/05', '2016/01/01', '픽업','오후2시','없음','박영희');
+
+insert into reservations( rvno, id,bname,price,startDate, endDate, rvDate, addtionalService,  arrivalTime, theOther, rvName)
+values (rvseq.nextval,'kim','정봉이',110000,'2016/02/01','2016/02/05', '2016/01/01', '픽업','오후3시','없음','홍길동');
+
+commit ; 

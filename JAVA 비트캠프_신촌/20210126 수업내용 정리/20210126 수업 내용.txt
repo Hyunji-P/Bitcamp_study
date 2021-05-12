@@ -1,0 +1,119 @@
+[오전 수업]
+A06_Main1TopN
+
+*교안 206쪽 
+
+
+offset 변수 : 건너뛰는 갯수 
+limit 변수 : 보여줄 갯수 
+
+BoardDao 클래스 
+	매개변수 없는 생성자에  수퍼클래스 생성자를 호출해야함 
+
+selectList() 메소드 : xml 파일의 select 구문을 호출할 때 사용 
+3가지의 메소드가 오버로딩 되어있음 
+
+* 오류 사항 
+java.lang.IllegalArgumentException: 
+Mapped Statements collection does not contain value for NsBoard.SelectTopN
+
+1) 오타 
+2) xml 구문에 생성을 하지 않아서 
+3) 경로를 잘 못 적어서 
+
+
+mapmember.xml 
+테이블을 분간 하기 위해서 각 따로 만들어 주는것이 좋음 
+
+rowBounds 객체는 파라미터로 넘어갈 때 
+key, value 형식으로 넘어간다.
+
+따라서 , 매퍼 설정 파일 코딩 시 rowBounds 에 해당하는 파라미터 값은 
+java.util.HashMap 으로 속성값을 지정해준다. 
+
+1. Board 
+2. BoardDao
+3. 매퍼파일
+4. 맵 설정 파일 
+5. 메인 클래스 
+
+--------------------------------------------------------------------------------------------
+
+* 조인 ( 교안 208쪽  ~ 212쪽 ) 
+
+* 212쪽 
+	member : 일 (기준) , board(다) 
+
+
+1) Member 클래스에 list 추가 
+2) mapmember.xml select 구문 추가 
+		
+<resultMap type="MyMember" id="MemberBoardCollerction">
+	<id column="id" property="id"/>
+</resultMap>
+
+* 교안 210쪽 
+<resultMap>  에 코딩을 하며 그 코딩을 가지고 select 문에서 조인을 함 
+column : 테이블 관점 컬럼 이름 
+property : bean 클래스의 변수를 의미 
+
+
+<collection property=""></collection> 
+: bean 클래스에 변수가 collection 일때 사용 ( 그림파일 참고) 
+
+
+
+--------------------------------------------------------------------------------------------
+
+* 다중 조인 ( 교안 215쪽 ) 
+자바의 map 을 이용하면 편리 
+
+교안 217쪽 
+
+순서 
+1) mapmember.xml 파일 
+	테이블 컬럼은 모두 대문자로 되어있기 때문에 이부분에 주의 !! 
+
+2) 메인 클래스 코딩 
+8.자료형 매핑
+
+1)number(int, float) : Integer, Double, BigDecimal(오라클의 숫자 자료형은 Map으로 받는 경우)
+[출처] Spring 라이브러리 & MyBatis|작성자 binkug94
+
+==> 오라클 숫자 자료형을 Map 구조로 받기 때문에 숫자형은 BigDecimal 클래스로 처리한다. 
+	
+215쪽 
+숫자는 BigDecimal 클래스로 다뤄야한다.. 
+
+
+--------------------------------------------------------------------------------------------
+reservataions 테이블 생성 
+
+* 실습1) 고객과 예약한 정보를 조회하세요.
+조인구문과 HashMap 을 이용해서 풀어본다. 
+
+
+Timestamp 클래스 : 오라클에서 날짜형을 Map 구조로 받기 때문에 Timestamp  클래스로 처리한다.
+
+
+--------------------------------------------------------------------------------------------
+
+A09_Main1IfCondition 클래스 
+* 교안 218쪽 
+OGNL 문법 : 클래스 & 객체 시간에 했던 것들 
+
+* 교안 220쪽 
+
+* 교안 222쪽 
+ === > 키워드 검색 조건 
+
+--------------------------------------------------------------------------------------------
+* 실습 문제 풀어보기 
+
+
+
+
+
+
+
+

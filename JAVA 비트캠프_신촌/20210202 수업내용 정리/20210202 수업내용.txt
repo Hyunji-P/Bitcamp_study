@@ -1,0 +1,230 @@
+[ 오전 수업]
+<!-- 모든 것들을 공유할 수 있는 스프링 설정(공유) 파일 -> hello , member , album 등 -->
+<context-param>
+	<param-name>contextConfigLocation</param-name> 
+	<param-value>/WEB-INF/spring/applicationContext.xml</param-value>
+</context-param>
+
+applicationContext.xml ===> DB  관련된 URL 출처를 설정
+
+-------------------------------------------------------------------------------------------
+1. AlbumListController
+
+컨트롤러 --> DAO --> SqlSessionTemplate --> 매퍼파일 --> 데이터 베이스
+
+** 순서 흐름도 정리 할 것 
+
+2.페이징 처리 
+★ 2차 프로젝트에서 페이징 처리 클래스도 함께 공부 
+
+pageNumber  //보여줄 페이지 넘버(표현 가능한 페이지는 1부터 totalPage까지이다
+pageSize  //한 페이지에 보여줄 건수
+what // 검색 항목
+keyword // 검색 키워드
+
+4개의 파라미터는 jsp 페이지에서 안들어올 수도 있지만 파라미터는 챙겨야함 
+
+3. 필드 검색
+
+Map 컬렉션에 what 과 keyword 파라미터를 넣어서 메소드 매개변수로 넣어줌 
+
+4. mapalbum.xml
+동적  sql 로 처리  
+
+5. Paging 클래스 ( 이거는 무조건..공부 할 것)
+
+6. AlbumListController 클래스
+
+7. jsp 파일 
+
+
+-------------------------------------------------------------------------------------------
+* 공용 폴더 생성 
+WEB-INF > common 폴더 생성 
+
+alLists.jsp 에서 include
+
+테이블 위 상단 부분 코딩 ( 이미지 파일 참고) 
+
+-------------------------------------------------------------------------------------------
+
+* 앨범 추가하기 (교안 370쪽) 
+* 순서 기준 
+1) upload 폴더 생성 
+2) pom.xml 파일 
+	교안 371쪽 
+	<scope> 태그는 안적어도 됨 
+3) album-context.xml 파일 
+	교안 372쪽 
+		value 값은 메가 단위 이다. 
+		10485760 는 10메가 
+
+4) Album 클래스 
+	교안 373쪽 
+   	그림 이름을 저장할 변수 이름인 String image 
+	파일 업로드를 위한 변수는 MultipartFile 가 실제 처리를 한다고 보면 된다. 
+
+5) Album 클래스  
+	유효성 검사(교안 374쪽)
+
+6) Utility 클래스에 현재 시각에 관련된 파일명 코딩  
+
+   파일 업로드를 할때 업로드된 파일 이름에
+   현재 시각을 붙여서 업로드를 해보려고 함 
+
+   abc.png ==> somefile
+
+   abc202102021300.png ==> newfile 
+
+7) 매퍼파일 (mapalbum.xml) 
+	교안 376쪽 
+	
+-------------------------------------------------------------------------------------------
+
+*  교안 367쪽 ~ 369쪽
+
+
+
+1) DB에서 체크박스 , 라디오 버튼 , 콤보 박스 관련 테이블을 만든다. (교안 346쪽 ) 
+
+2) 다오 
+   insert 메소드
+
+3) AlbumInsertController
+	@ModelAttribute 가 먼저 실행됨 
+
+4) CheckBean 클래스 
+
+5) mapalbum.xml
+
+6) SqlMapConfig.xml
+ 	CheckBean 알리아스 설정
+
+7) alInsertForm.jsp 파일 
+	enctype="multipart/form-data" 파일업로드 시 필요함 
+	myvalue 값은 숫자이기 때문에 itemValue 속성값에 키값으로 코딩함 
+
+-------------------------------------------------------------------------------------------
+교압 370쪽 7번까지 구현함 
+
+
+-------------------------------------------------------------------------------------------
+교안 291쪽을 데이터 베이스와 연동하여 
+체크박스 , 라디오 버튼 , 콤보 박스에 데이터를 채워 넣어 보세요.
+human2.jsp , Human2Controller 등등 
+-------------------------------------------------------------------------------------------
+
+* 에러 항목 
+2월 02, 2021 5:08:32 오후 org.apache.catalina.core.ApplicationContext log
+SEVERE: 서블릿 [member]을(를) 위한 Servlet.init() 호출이 예외를 발생시켰습니다.
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'albumInsertController': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private dao.AlbumDao controller.AlbumInsertController.albumDao; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [dao.AlbumDao] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true), @org.springframework.beans.factory.annotation.Qualifier(value="dao")}
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:334)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1210)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:537)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:755)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:757)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480)
+	at org.springframework.web.servlet.FrameworkServlet.configureAndRefreshWebApplicationContext(FrameworkServlet.java:664)
+	at org.springframework.web.servlet.FrameworkServlet.createWebApplicationContext(FrameworkServlet.java:630)
+	at org.springframework.web.servlet.FrameworkServlet.createWebApplicationContext(FrameworkServlet.java:678)
+	at org.springframework.web.servlet.FrameworkServlet.initWebApplicationContext(FrameworkServlet.java:549)
+	at org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:490)
+	at org.springframework.web.servlet.HttpServletBean.init(HttpServletBean.java:136)
+	at javax.servlet.GenericServlet.init(GenericServlet.java:158)
+	at org.apache.catalina.core.StandardWrapper.initServlet(StandardWrapper.java:1134)
+	at org.apache.catalina.core.StandardWrapper.loadServlet(StandardWrapper.java:1089)
+	at org.apache.catalina.core.StandardWrapper.allocate(StandardWrapper.java:761)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:135)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:143)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:690)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:374)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1590)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:835)
+Caused by: org.springframework.beans.factory.BeanCreationException: Could not autowire field: private dao.AlbumDao controller.AlbumInsertController.albumDao; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [dao.AlbumDao] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true), @org.springframework.beans.factory.annotation.Qualifier(value="dao")}
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:561)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:331)
+	... 37 more
+Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [dao.AlbumDao] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true), @org.springframework.beans.factory.annotation.Qualifier(value="dao")}
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoSuchBeanDefinitionException(DefaultListableBeanFactory.java:1301)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1047)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:942)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:533)
+	... 39 more
+
+2월 02, 2021 5:08:33 오후 org.apache.catalina.core.StandardWrapperValve invoke
+SEVERE: 서블릿 [member]을(를) 위해 할당하던 중 예외 발생
+org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [dao.AlbumDao] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true), @org.springframework.beans.factory.annotation.Qualifier(value="dao")}
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoSuchBeanDefinitionException(DefaultListableBeanFactory.java:1301)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1047)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:942)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:533)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:331)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1210)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:537)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:755)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:757)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480)
+	at org.springframework.web.servlet.FrameworkServlet.configureAndRefreshWebApplicationContext(FrameworkServlet.java:664)
+	at org.springframework.web.servlet.FrameworkServlet.createWebApplicationContext(FrameworkServlet.java:630)
+	at org.springframework.web.servlet.FrameworkServlet.createWebApplicationContext(FrameworkServlet.java:678)
+	at org.springframework.web.servlet.FrameworkServlet.initWebApplicationContext(FrameworkServlet.java:549)
+	at org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:490)
+	at org.springframework.web.servlet.HttpServletBean.init(HttpServletBean.java:136)
+	at javax.servlet.GenericServlet.init(GenericServlet.java:158)
+	at org.apache.catalina.core.StandardWrapper.initServlet(StandardWrapper.java:1134)
+	at org.apache.catalina.core.StandardWrapper.loadServlet(StandardWrapper.java:1089)
+	at org.apache.catalina.core.StandardWrapper.allocate(StandardWrapper.java:761)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:135)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:143)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:690)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:374)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1590)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:835)
+
+
+에러 : register.jsp(member 와 관련된 ) 최초 실행 파일을 실행 시키면
+         member 와 관련이 없는 albumInsertController 컨트롤러 부분에서 스프링 에러가 발생함
+
+원인 : 현재 controller 폴더 안에 모든 컨트롤러 파일이 전부다 들어있어서 
+          최초 실행 파일을 실행시킬 때 폴더가 같아 관련 없는 컨트롤러도 같이 찾아가니 에러가 발생하는 것 같음 
+
+해결 방법 : 1) 폴더를 각 세분화 시킴 
+	  2) 그게 아니면 , xxx-context.xml 파일에서 모든 dao 객체를 컴포넌트 스캔 처리를 해줌 
+
+
+
+

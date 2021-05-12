@@ -1,0 +1,20 @@
+프로젝트 생성 : AopExam
+
+AopMain.java(메인)
+Order.java(상품 주문)
+Board.java(게시글 남기기)
+
+패키지 sample1
+	핵심 기능과 공통 기능을 각각의 파일에 명시했다.
+		
+패키지 sample2
+	핵심 기능과 공통 기능을 분리하여 각각의 파일에 명시했다.
+	Order 파일과 Board 파일에서 각각 Login/Logout 파일을 이용했다.
+		
+패키지 sample3
+	aop xml 스키마를 이용하여 구현했다.
+		
+패키지 sample4
+	Annotation을 이용하여 구현했다.
+		
+	

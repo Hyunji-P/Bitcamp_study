@@ -1,0 +1,35 @@
+-- drop table Rooms ; 
+-- drop sequence roseq ; 
+create sequence roseq ;
+
+create table Rooms(  
+   rono  number primary key,
+   bname varchar2(150) unique,
+   btype varchar2(50),
+   maxp number,
+   price number,
+   image1 varchar2(200) default 'noimage.jpg',
+   image2 varchar2(200) default 'noimage.jpg',
+   image3 varchar2(200) default 'noimage.jpg',
+   comments varchar2(1000) default ' '
+);
+
+insert into Rooms(rono,  bname,  btype,  maxp,  price,  comments)
+values(roseq.nextval, '덕선이', '스파', 3 , 50000, '커플룸');
+
+insert into Rooms(rono,  bname,  btype,  maxp,  price,  comments)
+values(roseq.nextval, '택이', '기본', 5, 70000, '가족룸');
+
+insert into Rooms(rono,  bname,  btype,  maxp,  price,  comments)
+values(roseq.nextval, '정환이', '스파', 7, 90000, '가족룸');
+
+insert into Rooms(rono,  bname,  btype,  maxp,  price,  comments)
+values(roseq.nextval, '정봉이', '기본', 9, 110000, '대가족룸');
+
+insert into Rooms(rono,  bname,  btype,  maxp,  price,  comments)
+values(roseq.nextval, '동룡이', '기본',  3 , 50000, '커플룸');
+
+insert into Rooms(rono ,  bname, btype, maxp , price, comments)
+values(roseq.nextval, '선우', '스파', 15, 130000, 'MT룸');
+
+commit;

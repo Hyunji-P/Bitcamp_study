@@ -1,0 +1,140 @@
+[오전수업]
+*순서
+1. 오라클 developer 에서 테이블 생성
+2. Brd(bean 클래스) 생성 -> 변수 , getter , setter , 매개변수 없는 생성자 , toString 오버라이딩
+3. BrdDao 클래스 생성 -> SelectAll() 메소드 , List 컬렉션 생성 
+4. boList.jsp 생성 -> 클래스 , 객체 , SelectAll() 메소드 호출 
+5. BrdDao 클래스에서 jdbc 웹 프로그래밍 실행 준비 (데이터 베이스에 접근해야하기 때문에)
+6. 260쪽 , driver , url , id , password 문자열 먼저 만들기 
+7. 260쪽 , jdbc 프로그래밍 실행 코딩 --> ★269쪽 ResultSet일 경우 while 문을 활용하여 데이터를 setter 해줄것 
+8. jsp 파일에 확장 for문으로 테이블 만들기 
+
+9. SuperDao 생성 --> 공통된 사항 코딩 (pstmt, rs 는 각각 맡은 역할이 있기 때문에 super에 코딩하지 않는다)
+10. 기존 서브 클래스에 공통 사항 부분 삭제 
+
+11. loginFrom.jsp 로그인 페이지 생성 
+- 테이블 한개 당 다오 한개 매치 
+brds(게시물) 테이블 생성 
+no : 글번호 , writer : 작성자 , subject : 글제목 , content : 글내용
+create table brds(
+	no number primary key,
+	writer varchar2(30),
+	subject varchar2(50),
+	content varchar2(50)
+);
+
+
+alter table trds add 
+constraint abcd
+foreign key(writer)
+references emp(id)
+on delete set null; 
+
+create sequence seqbrd;
+
+insert into brds(no,writer,subject,content)
+values(seqbrd.nextval,'kim9','런닝맨','재밌어요');
+
+insert into brds(no,writer,subject,content)
+values(seqbrd.nextval,'kim9','1박2일','잘 안봐요');
+
+insert into brds(no,writer,subject,content)
+values(seqbrd.nextval,'lee','복면가왕','재밌어요');
+commit;
+
+brd(bean) 클래스 생성 
+
+BrdDao 클래스 생성
+
+boList.jsp : 게시물 목록을 보여줄 페이지 
+	(접두사 : me(회원) , bo(게시물) , pr(제품) , od(주문))
+	목록을 가져오려면 BrdDao 클래스에게 부탁을 하고 BrdDao 클래스는 데이터 베이스로 감 
+
+
+Dao 클래스 모듈화(부모클래스와 서브클래스를 나눠서 작게 쪼개는것을 모듈화라고함)
+	SuperDao
+		EmpDao
+		BrdDao
+
+*상속 
+생성자가 호출되면서 바로 260쪽 1번 , 2번을 실행하려고함 
+
+
+loginFrom.jsp 
+	로그인 페이지 작성 
+	loginFrom.jsp  → loginTo.jsp →empDao→ boList.jsp
+
+	세션(session)
+	게시물에 대한 접근 제한자 설정 
+	
+	로그인 체크 시 
+	존재하는 id와 name이 있으면 객체 하나를 모두 리턴해야함 
+	(ex. 네이버 로그인 시 해당 칸에 정보들이 나옴)
+
+
+
+85쪽
+ 이사를 하는데 오피스텔에 감 , 미리 구비되어있는 제품들 (옵션사항) --> 빌트인 되어있는지 물어봄
+ jsp에도 자바로 바뀌면서 미리 만들어놓은 객체들이 있음(빌트인 객체)
+
+ <scope> 
+ page , request , session , application → 저장소(캐비넷)
+
+
+*내장 객체의 영역 : 103쪽 ~ 105쪽
+ 바인딩 : 데이터를 결속한다라는 개념 
+
+ 104쪽 
+ pc에서 자기 자신만 보게끔 하는 것 : page
+ 반 전체에게 보게끔 하는 것 : request , session
+ 비트캠프 전체 보게끔 하는 것 : application
+
+ 국민은행 들어가서 아이디와 비번 입력 , 자동 로그아웃됨 
+ 개인적인 로그인 정보는 session에 저장을 함 
+ 
+ 물건 a , 물건b를 장바구니에 담아놓고 로그아웃하면 내역이 다 사라짐(session 휘발성)
+ 만약 , 로그아웃을 하고 다시 재로그인을 했어도 장바구니 내역이 담아놓는 경우가 있음 
+ -> 임시 db에 장바구니 내역을 담아놓고 재로그인시 보여주는 방식임 
+
+ 103쪽 
+
+ ex) session.setAttribute("mix",bean)
+     mix=커피
+
+ 믹스커피에 대한 정보를 가져오려면 getAttribute를 사용하는데 반환타입이 오브젝트이므로 ★강등이 필요하다.
+
+
+-------------------------------------------------------------------------------------------------------------
+[오후 수업]
+
+세션 - 브라우저
+브라우저가 닫히지 않는 이상은 세션은 항상 살아있음
+다만 , 은행은 세션 만료기간을 제한해놓고 있음 
+
+ex) 네이버 --> tab을 열면 브라우저가 살아있다고 봐야함 
+
+
+
+
+지시어 : 76쪽 
+include 지시어 : 79쪽(간단하게 ctrl c+ctrl )
+공유할 내용을 공용폴더에 넣어놓고 불러올때를 include 지시어를 이용한다.
+
+common 폴더 내 
+	common.jsp : 모든 파일들이 공유할 내용을 저장한다. 
+
+상대 경로 지정 방식
+	.은 현재 경로
+	..은 상위 경로
+	/는 폴더 구분자
+
+./../common/common.jsp(모듈화)
+
+include 지시어 : 79쪽
+boList.jsp 파일의 상단에 적어두자.
+
+<%@ include file="./../common/common.jsp"%>	
+
+어떤 페이지던 로그인 한 상태로 두고 싶으면 공용파일에 두는것이 좋다.
+
+

@@ -1,0 +1,85 @@
+[오전 수업]
+*EL_JSTL.pdf 파일
+*순서
+상품 목록 세션에 저장하기
+자바
+	ProductBean.java
+	ProductDao.java
+jsp
+	abcdFrom.jsp
+	abcdTo.jsp
+
+
+1. 41쪽
+   출력결과 : 아이폰 , 갤럭시를 데이터 베이스에서 읽어옴 
+   데이터 베이스의 1건을 위한 빈클래스 생성 
+   
+2. 
+   1)ProductBean 클래스 생성
+   2)변수 정의 , getter , setter , 생성자 구비 
+   3)ProductDao 클래스 생성
+   4)GetProductList() 메소드 생성 
+   5)List 컬렉션 생성 
+   6)ProductBean 클래스에서 생성자 만듬 
+   7)List 컬렉션 -> add를 사용하여 상품을 담음 
+   8)abcdFrom.jsp , abcdTo.jsp 파일 생성
+   9)abcdFrom.jsp -> ProductDao.java의 GetProductList() 호출 -> 공유목적으로 세션에 저장 -> abcdTo.jsp에서 표 형식으로 출력
+   10)useBean 객체 생성 
+       스크립트 릿 -> GetProductList() 호출
+   11)세션 바인딩 작업 , 리다이렉션 작업 
+   12)abcdTo.jsp 에 코딩 
+      <h2> : head 태그 , 숫자가 커질 수록 크기가 작아진다 .
+      세션을 가져오려면 for문장을 써야함 -> taglib 지시어 생성 
+       foreach 문 생성 -> sessionScope 사용 
+       변수명은 제품이 2개니까 각각 product 로 지정 
+      
+3. 42쪽
+   43쪽
+   ex2.jsp 파일 
+   StringTokenizer 클래스와 동일한 개념
+   칸 너비 : width 속성 사용 
+
+4. 44쪽
+   1)coreFortokensExam01.jsp , MyDao.java 생성
+   2)MyDao.java  메소드 생성
+   3)coreFortokensExam01.jsp 에 코딩 
+   4)임의로 체크박스 이름을 hobby 로 적음 
+   5)홀수만 체크 : varStatus 사용 
+   6)select 태크 생성(파라미터 : member)
+     문자열 비교는 외따옴표 
+     <option value="${member}" selected="selected">${member}
+    value="${member}" : 넘어가는 값 , ${member} : 사용자에게 보여주는 값 
+
+5. 21쪽
+   주로 흐름제어 부분으로 사용 
+   ※ 교재 참고 할 것 
+
+6. 65쪽
+   숫자에 대한 서식 지정하기 
+   fmtNumberExam.jsp
+   1)request 스코프 바인딩 
+   2)테이블 생성
+   3)콤마를 사용하려면 태그 라이브러리 사용(18쪽)
+   4)fmtNumberExam.jsp 코딩 
+     <fmt:formatNumber/> : 숫자형식(콤마)
+     type="percent" : 타입 속성 퍼센트
+     pattern 속성 - # : 숫자가 없으면 표기 x 
+                      - 0 : 숫자가 없어도 표기 o
+     <hr> : 수평선을 그려주는 html 태그 
+     <!-- --> : html주석
+     <%-- --%> : jsp주석 
+   5)63쪽 참고 
+
+
+7. 66쪽
+    1) Product2 클래스 생성(변수정의 , getter , setter , 생성자)
+    2) MyDao 클래스 -> GetList() 메소드 구현 -> 여러건을 다뤄야하기때문에 컬렉션
+    3) productList.jsp 생성 
+    4) useBean 생성 
+    5) GetList() 메소드 호출 
+    6) 세션 바인딩
+    7) <body> 태그 코딩 
+    
+8. 91쪽
+   fnFunctionExam.jsp
+   

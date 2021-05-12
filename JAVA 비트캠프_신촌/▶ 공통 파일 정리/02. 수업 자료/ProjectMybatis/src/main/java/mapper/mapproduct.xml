@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="NsProduct">		
+	<select id="Choose"  resultType="MyProduct" parameterType="java.util.HashMap">
+		select pno, pname, stock,
+		<choose>
+			<when test="somevalue == 'DOUBLE'">
+				2.0 * price as price
+			</when>
+			<when test="somevalue == 'HALF'">
+				0.5 * price as price 
+			</when>
+			<otherwise>
+				0.3 * price as price
+			</otherwise>
+		</choose>
+		from products
+	</select>	   	
+</mapper>

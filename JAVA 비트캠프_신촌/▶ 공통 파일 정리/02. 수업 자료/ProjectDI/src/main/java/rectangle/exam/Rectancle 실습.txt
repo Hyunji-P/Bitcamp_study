@@ -1,0 +1,17 @@
+스프링 DI 실습
+
+사각형의 밑변(10.0)과 높이(4.0)를 생성자 주입시켜 다음과 같이 처리하세요.
+
+public class RectangleMain {
+  public static void main(String[] args) {
+    Resource resource = new ClassPathResource("applicationContext.xml");
+    BeanFactory factory = new XmlBeanFactory(resource);
+
+    Rectangle rectangle = (Rectangle)factory.getBean("rectangleBean"); 
+    rectangle.Print(); //출력 결과 사각형 넓이 : 40.0 이다
+
+	rectangle.Diagonal() ; //출력 결과 대각선 길이 : 10.770329614269007
+
+	System.out.println(Math.sqrt(100 + 16));
+  }
+}

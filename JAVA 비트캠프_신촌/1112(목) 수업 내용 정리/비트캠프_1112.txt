@@ -1,0 +1,34 @@
+[오전 수업]
+
+
+equi join ( equal join 과 동일) 
+
+대부분 equi join은 inner join이라고도 한다.
+(outer 인지 inner 인지 안적으면 default 값이 inner이다)
+
+outer join 
+
+inner join + 알파(= 양쪽에 공통적이지 않은 것들)
+7 + 13 = 20 
+
+
+※ natural join 은 ansi 표준 조인임 
+   using ansi 표준 조인임 
+
+
+
+
+
+boards 테이블에서 model 보기 
+※1             :  다      관계 
+  employees : boards 
+  사원한명이 게시물을 여러개 남길 수 있음 
+
+
+서브 쿼리
+input , output 을 한번에 할 수 있음
+
+테이블에는 as사용이 불가하다.
+
+
+[오후수업]

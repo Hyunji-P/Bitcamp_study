@@ -1,0 +1,17 @@
+[오후 수업]
+
+https://cafe.naver.com/ugcadman/102
+
+오라클 설치
+01. 오라클 11g 설치
+02. sql developer 압축 해제
+03. sql developer를 다운로드하여 c드라이브에 복사 후 압축 해제하기 
+04. 하위 폴더에 sqldeveloper.exe 파일 클릭하시면 실행 된다.(=이클립스와 똑같음)
+
+
+참고 할 사이트 : https://cafe.naver.com/ugcadman/900
+
+관리자 비번 : oracle
+
+
+★ https://blog.naver.com/kywoo94/222120138210 참고 할것 

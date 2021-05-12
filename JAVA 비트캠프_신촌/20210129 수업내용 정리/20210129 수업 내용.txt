@@ -1,0 +1,123 @@
+[오전 수업]
+
+* 유효성 검사 ( 교안 325쪽 )
+
+1) mvc 설정 파일 (  human-context.xml )
+<annotation-driven /> : 자바에서 지정해주는 태그 
+
+2) Bean Validation ( 교안 293쪽 ~ 295쪽 ) 
+  - pom.xml 파일에 유효성 검사를 하기 위한 태그를 추가 
+    (JSR , 하이버네이트 용어 알아두기)
+
+3) 빈클래스 어노테이션 처리 (Human.java) 
+
+4) 컨크롤러 클래스 ( 교안 328쪽 ) 
+   @Valid : 커맨드 객체에 붙여서 유효성 검사 체크 
+
+5) jsp 파일 (306쪽 ~ )
+form 태그를 사용하면 표현식(<%%>) 이 지원이 안됨 
+
+--> ${ } : EL 은 사용 가능함 
+
+   - <c:set var="apppath" value="<%=request.getContextPath()%>"/>
+      <c:set> 태그로 값 설정 
+
+   - ${} el 표현식으로 action 태그 지정 
+
+
+6) jsp 파일에서 human 객체를 참조하려면 1번 내용 적용 (교안 328쪽) 
+   1번을 적용하지 않으면 그 메소드 내에서만 커맨드 객체를 사용 가능함 
+   - @Valid Human human 메소드의 매개변수의 객체는 그 메소드 내에서만 접근 가능 
+   - @ModelAttribute("human") --> jsp 
+
+   - 1번과 2번의 객체이름은 달라도 되지만 
+     1번 객체이름이 yyy면 jsp 에서는 yyy로 접근 
+     2번 객체이름이 xxx면 메소드 내에서는 xxx로 접근 
+ 
+   - 1번을 안적으면 객체 이름은 command 로 지정 된다. 
+      
+   
+ 7) input 문구 자리에 <form:input path=""/> 
+     반드시 path 에 파라미터이름이 들어가야 한다. 
+
+     <input id="name" name="name" value=""> --> <form:input path="name"/> 으로 변경
+
+    유효성 에러 문구 자리에 <form:errors path="id" cssClass="err"/> 으로 지정하며
+    cssClass 속성은 css 스타일 지정 시 사용한다. 
+
+---------------------------------------------------------------------------------
+
+* 에러 발생 
+[org.springframework.web.context.ContextLoaderListener]의 애플리케이션 리스너를 설정하는 중 오류 발생
+java.lang.ClassNotFoundException: org.springframework.web.context.ContextLoaderListener
+
+1) https://blog.naver.com/good_ray/221860615789 참고 
+2) 그래도 안되면 .. 워크스페이스 해당 프로젝트 백업 후 다시 임포트 하기 
+
+* 유효성 검사에서 같은 문장 반복 
+private final String MUST_INPUT 변수를 지정하여 반복 문장을 정해줌  
+
+* @Pattern(regexp = "") : 정규 표현식 
+
+-----------------------------------------------------------------------------------
+
+* 교안 299쪽 ~ 
+* @Controller 내에 1) @ModelAttribute 먼저 실행 되며 2) @RequestMapping 그 다음에 실행됨 
+
+체크박스 / 라디오 / 콤보박스 
+
+1) 컨트롤러 클래스 
+   체크박스 / 라디오 / 콤보박스 목록이 되는  list 컬렉션 생성 
+
+2) 원리 
+    @ModelAttribute("hobbies") ==> 바인딩이랑 똑같음 
+    외부에서 취미목록을 던져줄 수 있음
+ 
+    메소드 리턴값을 jsp 파일에서 참조할 수 있게 스프링 어노테이션 지정 
+
+3) Hobby 클래스 
+   목록이 되는 테이블을 만든다. 
+
+   - 절대적인 것은 아니지만 영문(파라미터) 와 한글(보여주는값) 변수를 지정하여 구현하는 방법도 있음 
+
+4) jsp 코딩 
+라디오 버튼 
+<form:radiobuttons path="hobby" items="${hobbies}" itemLabel="korea" itemValue="english"/>
+
+-----------------------------------------------------------------------------------
+
+* humanEnd.jsp 
+
+humanStart.jsp  에서 커맨드 이름을 human 으로 지정했기 때문에
+human.id ~ 로 값을 가져오면 된다.
+
+
+* 최종 정리 ( 교안 290 ~ ) 
+
+------------------------------------------------------------------------------------
+* 실습 
+
+2차 프로젝트에서 했던 임의의 테이블을 가지고 위에 유효성 검사를 진행해보세요.
+
+일자 : 2021/01/29(금)
+
+<form:form /> 태그
+
+human.jsp → HumanController → humanStart.jsp →  humanEnd.jsp
+
+폼 양식 데이터 채우기 : Hobby, Job 클래스
+
+빈 클래스 : Human.java(Bean Validation)
+
+pom.xml 수정
+
+프로젝트 MvcExam
+2차 프로젝트에서 만들었던 임의의 테이블을 사용하여
+스프링을 사용하여 폼 유효성 검사를 수행하는 프로그램을 작성해 보세요.
+
+폼 양식에 라디오, 체크 박스, 콤보 박스는 적어도 1개씩 추가하세요.
+
+
+----------------------------------------------------------------------------------------
+* jstl 방식이 아닌 <form:select> , <form:option>  을 사용하면 유효성 검사 후 
+이전 선택했던 내용이 고정됨

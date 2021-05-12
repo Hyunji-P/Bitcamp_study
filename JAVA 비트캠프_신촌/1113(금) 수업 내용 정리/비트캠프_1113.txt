@@ -1,0 +1,77 @@
+[오전 수업]
+
+
+빅뱅 테이블 	oraman.employees 
+
+빅뱅한테 오라맨 테이블을 보여줄 수 있는 방법이 있음 
+
+어떠한 테이블 전체가 아닌 일부분만 보여주고 싶을 때 (ex.급여는 보여주고 싶지 않음)
+테이블 자체를 오픈하지 않고 , 뷰라는 대체수단을 사용한다.
+
+
+
+- view (뷰)
+
+oraman 사용자는 bigbang 사용자에게 employees 테이블의 일부분을 보여 주고자 한다.
+단 , 전체가 아닌 id , name , gender , birth 까지만 보여 주고자 한다.
+
+-- 권한이 불충분함.
+-- 오라맨 사용자는 뷰 생성 권한이 부족하여 뷰 생성이 불가능하다.
+오류 보고 -
+ORA-01031: insufficient privileges
+01031. 00000 -  "insufficient privileges"
+*Cause:    An attempt was made to perform a database operation without
+           the necessary privileges.
+*Action:   Ask your database administrator or designated security
+           administrator to grant you the necessary privileges
+
+
+1. 관리자 세션에서 오라맨한테 권한주기
+2. 오라맨 세션에서 쿼리 
+
+
+* 제한성 
+
+전체 컬럼이 아닌 중요하거나 보여주면 안되는 컬럼은 국한되어 보여줌 
+
+
+
+3. 빅뱅세션
+
+다음과 같은 오류가 출력되는데 , 이유는 오타 이거나 권한이 불충분하여 발생한다.
+ORA-00942: table or view does not exist
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+2행, 22열에서 오류 발생
+
+4. 오라맨세션
+
+객체 권한 줘야함 
+
+
+5. 빅뱅세션
+
+
+
+
+
+-> 뷰는 하드디스크의 공간을 차지 하지않고 
+해당 문장만 기억하고 있음
+
+
+
+
+[오후 수업]
+
+
+제약 조건 
+
+사전에 미리 입력 / 수정을 방지하기 위해 사용 
+
+
+
+
+테이블에 pk 키는 
+0개 아님 1개임
+

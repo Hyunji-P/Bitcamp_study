@@ -1,0 +1,40 @@
+[오전 수업]
+
+1. MyStringExam 클래스 
+2. StrRev 클래스
+3. GetName2 클래스
+
+	indexOf() 로 무언가를 찾고자 할때 없으면 -1이 나옴
+
+4. MyHplm 클래스
+
+	parseInt() : 문자열에 해당하는 int값 반환
+	parseDouble() : 문자열에 해당하는 double 값 반환
+
+5. StringTokenizerTest 클래스(splict 메소드와 같은 개념)
+   
+   StringTokenizer
+   문자열을 토큰으로 만들어주는 클래스
+   자르는 기준은 스페이스이며 스페이스를 delimeters 라고 하며 
+   잘라진 문자열을 토큰이라고 한다.
+
+   String nextToken() : 문자열을 끄집어 낼때 사용 (선입선출 : 먼저 들어온 데이터가 먼저 나감)
+
+   과일을 담을 때 바구니 (st1)	<-----------------   사람
+    	소녀시대			3개중에 한개 가지고 있는지 물어봄>소녀시대 끄집어내고>출력
+	빅뱅			//끄집어 낼때는 반복문하지만 바구니 안에 얼마나 있을지 모르기 때문에 while 문장을 사용한다
+	원더걸스			//for문 : 정해진 개수를 알때 사용 , while문 : 정해진 개수를 모를 때 사용
+
+
+[오후 수업]
+6. Arrays 클래스(MyArrayExam클래스)
+
+fill() 메소드 : 채우기
+equals(a,b) : 같은지 확인
+binarySearch(배열 , a) : 배열에서 a가 몇번째 인덱스에 있느지 
+copyOf() : 배열 복사하여 새배열 만들기
+copyOfRange(배열 , from , to) : from 에서 to까지 추출 
+sort(arr5) : 오름차순 정렬 
+
+
+7.Random 클래스

@@ -1,0 +1,76 @@
+drop sequence seqalbum ;
+
+create sequence seqalbum increment by 1 start with 1;
+
+drop table albums purge ;
+
+-- 앨범 테이블을 생성하시오.
+create table albums(
+	id number primary key,
+	albumname varchar2(30) not null,
+	song varchar2(30) not null,
+	lyricist varchar2(30) not null,
+	songwriter varchar2(50) not null,
+	transcription varchar2(50) not null,
+	writerdate date,
+	image varchar2(50),
+	genre varchar2(255),
+	mediatype varchar2(255),	
+	emailagree varchar2(30)	
+);
+ 
+insert into albums(id, albumname, song, lyricist, songwriter, transcription, writerdate, genre, mediatype, emailagree)
+values(seqalbum.nextval, '스무살의 봄', '하루 끝', '김이나', '박근태, 김도훈', '김도훈', sysdate, '발라드', 'lp,cd', 'yes');
+
+insert into albums(id, albumname, song, lyricist, songwriter, transcription, writerdate, genre, mediatype, emailagree)
+values(seqalbum.nextval, '스무살의 봄', '그 애 참 싫다', '김은수', '심은지', '심은지', sysdate, '발라드', 'lp,cd', 'yes');
+
+insert into albums(id, albumname, song, lyricist, songwriter, transcription, writerdate, genre, mediatype, emailagree)
+values(seqalbum.nextval, 'REAL', '이게 아닌데', '김이나', '김형석', '윤우석', sysdate, '발라드', 'lp,cd', 'yes');
+
+insert into albums(id, albumname, song, lyricist, songwriter, transcription, writerdate, genre, mediatype, emailagree)
+values(seqalbum.nextval, 'REAL', '느리게 하는 일', '최갑원', 'Peejay, 민웅식', '김진훈', sysdate, '발라드', 'lp,mp3', 'yes');
+
+insert into albums(id, albumname, song, lyricist, songwriter, transcription, writerdate, genre, mediatype, emailagree)
+values(seqalbum.nextval, 'REAL', '좋은 날', '김이나', '이민수', '이민수', sysdate, '발라드', 'lp,cd,mp3', 'yes');
+
+insert into albums(id, albumname, song, lyricist, songwriter, transcription, writerdate, genre, mediatype, emailagree)
+values(seqalbum.nextval, 'REAL', '첫 이별 그날 밤', '윤종신', '윤종신', '조정치', sysdate, '발라드', 'lp,cd,mp3,tape', 'yes');
+
+insert into albums(id, albumname, song, lyricist, songwriter, transcription, writerdate, genre, mediatype, emailagree)
+values(seqalbum.nextval, 'REAL', '혼자 있는 방', '최갑원, 아이유', '전승우', '전승우', sysdate, '발라드', 'lp,cd,mp3,tape,wav', 'yes');
+
+commit;
+
+select * from albums;
+
+select count(*) from albums;
+
+
+-- 폼의 체크 박스, 라디오 버튼, 콤보 박스를 위한 테이블
+drop table Checkes ;
+
+create table Checkes(
+	mykey varchar2(255),
+	myvalue varchar2(255),
+	module varchar2(255),
+	field varchar2(255)
+);
+
+insert into Checkes values('lp', '1', 'album', 'mediatype');
+insert into Checkes values('cd', '2', 'album', 'mediatype');
+insert into Checkes values('mp3', '3', 'album', 'mediatype');
+insert into Checkes values('tape', '4', 'album', 'mediatype');
+insert into Checkes values('wav', '5', 'album', 'mediatype');
+
+insert into Checkes values('yes', '1', 'album', 'emailagree');
+insert into Checkes values('no', '2', 'album', 'emailagree');
+
+insert into Checkes values('--- 선택해 주세요.----------', '0', 'album', 'genre');
+insert into Checkes values('발라드', '1','album', 'genre');
+insert into Checkes values('트로트', '2', 'album', 'genre');
+insert into Checkes values('댄스', '3','album', 'genre');
+insert into Checkes values('힙합', '4', 'album', 'genre');
+
+commit ;
+

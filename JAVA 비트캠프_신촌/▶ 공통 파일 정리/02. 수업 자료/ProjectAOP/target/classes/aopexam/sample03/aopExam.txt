@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation=
+		"http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd 
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop.xsd" >
+
+	<!-- AopMain.java 파일에서 참조됩니다.  -->
+	<bean id="myorder" class="aopexam.sample03.OrderPet" />
+	<bean id="myboard" class="aopexam.sample03.BoardPet" />	
+		
+	<!-- 공통 관심 사항의 빈 설정 -->
+	<bean id="mylogin" class="aopexam.sample03.Login" />
+	<bean id="mylogout" class="aopexam.sample03.Logout" />
+	<bean id="mydao" class="aopexam.sample03.DAO" />
+
+	<!-- 이하 AOP 설정입니다. -->
+	<!-- mylogin이라는 aspect의 login 메소드와 welcome 메소드를 -->
+	<!-- sample03 패키지 내의 OrderImpl의 모든 메소드가 수행되기 전에 --> 
+	<!-- 실행되도록 설정하겠습니다. -->
+	<!-- login 메소드를 먼저 실행하도록 하겠습니다. -->
+	<aop:config>
+		<aop:aspect ref="mylogin" order="0">
+			<aop:before method="login"
+				pointcut="execution(* aopexam.sample03.OrderPet.*())" />
+		</aop:aspect>
+	</aop:config>
+	
+	<aop:config>
+		<aop:aspect ref="mylogin" order="0">
+			<aop:before method="welcome"
+				pointcut="execution(* aopexam.sample03.OrderPet.*())" />
+		</aop:aspect>
+	</aop:config>	
+
+	<aop:config>
+		<aop:aspect ref="mydao" order="1">
+			<aop:after method="dao"
+				pointcut="execution(* aopexam.sample03.OrderPet.*())" />
+		</aop:aspect>
+	</aop:config>
+	
+	<aop:config>			
+		<aop:aspect ref="mylogout" order="0">
+			<aop:after method="logout" 
+				pointcut="execution(* aopexam.sample03.OrderPet.*())" />
+		</aop:aspect>
+	</aop:config>
+	
+	<aop:config>
+		<aop:aspect ref="mylogin">
+			<aop:before method="login" 
+				pointcut="execution(* aopexam.sample03.BoardPet.*())" />
+		</aop:aspect>
+	</aop:config>
+
+	<aop:config>
+		<aop:aspect ref="mylogout">
+			<aop:after method="logout" 
+				pointcut="execution(* aopexam.sample03.BoardPet.*())" />
+		</aop:aspect>
+	</aop:config>	
+</beans>

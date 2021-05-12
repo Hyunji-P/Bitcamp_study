@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="myinterface.AlbumMapperInterface">
+	<sql id="myselect">
+		select * from albums
+	</sql>
+	
+	<select id="GetDataList" resultType="MyAlbum"> 
+		<include refid="myselect" /> 
+	</select>	
+	
+	<!-- 분리선입니다. -->
+	
+	<insert id="InsertData" parameterType="MyAlbum" >
+		insert into albums(id, albumname, song, lyricist, songwriter, transcription, writerdate, image, genre, mediatype, emailagree) 
+		values(seqalbum.nextval, #{albumname}, #{song}, #{lyricist}, #{songwriter}, #{transcription}, #{writerdate}, #{image}, #{genre}, #{mediatype}, #{emailagree})
+	</insert>
+	
+	<update id="UpdateData" parameterType="MyAlbum" >
+		update albums set
+		albumname=#{albumname}, song=#{song}, lyricist=#{lyricist}, songwriter=#{songwriter}, transcription=#{transcription}, 
+		writerdate=#{writerdate}, image=#{image}, genre=#{genre}, mediatype=#{mediatype}, emailagree=#{emailagree}
+		where id=#{id} 
+	</update> 	
+	
+	<update id="DeleteData" parameterType="Integer" >
+		delete from albums where id=#{id} 
+	</update> 
+	
+	<select id="GetAlbumByPk" resultType="MyAlbum" parameterType="Integer"> 
+		<include refid="myselect" /> 
+		where id=#{id} 
+	</select> 	
+	
+	<select id="SelectTopN"  resultType="MyAlbum" parameterType="java.util.HashMap">
+		select * from albums order by song asc 
+	</select>		
+
+	
+	<select id="JoinGet3Way" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select m.name, p.pname, p.price, o.qty, p.price * o.qty as amount  
+		from (albums m inner join orders o
+		on m.id = o.mid) inner join products p 
+		on o.pno = p.pno 
+	</select> 	
+	
+	<select id="IfCondition"  resultType="MyAlbum" parameterType="hashmap">
+		select *
+		from albums
+		<if test="albumname != null">
+			where albumname = #{albumname}
+		</if> 
+	</select>	
+	
+	<select id="Foreach1" resultType="MyAlbum">
+		select *
+		from albums
+		where name in
+	   	<foreach item ="item" index="index" collection="array" open="(" separator="," close=")">
+	         #{item}
+	   	</foreach>
+	</select>	
+	
+	<select id="Foreach2" resultType="MyAlbum">
+		select *
+		from albums
+	   	where name in
+	   	<foreach item ="item" index="index" collection="list" open="(" separator="," close=")">
+	         #{item}
+	   	</foreach>
+	</select>	
+	
+</mapper>

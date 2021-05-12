@@ -1,0 +1,12 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Wed Jan 13 13:15:23 KST 2021
+http\://code.lds.org/nexus/content/groups/main-repo/.error=Could not transfer artifact com.oracle\:ojdbc6\:jar\:javadoc\:11.2.0.3 from/to oracle (http\://code.lds.org/nexus/content/groups/main-repo)\: code.ldschurch.org
+https\://repo.maven.apache.org/maven2/.lastUpdated=1609047041969
+https\://code.Ids.org/nexus/content/groups/main-repo/.error=Could not transfer artifact com.oracle\:ojdbc6\:jar\:javadoc\:11.2.0.3 from/to codeIds (https\://code.Ids.org/nexus/content/groups/main-repo)\: code.ids.org
+@default-oracle-http\://code.lds.org/nexus/content/groups/main-repo/.lastUpdated=1609047041283
+https\://code.lds.org/nexus/content/groups/main-repo/.error=Could not transfer artifact com.oracle\:ojdbc6\:jar\:javadoc\:11.2.0.3 from/to codelds (https\://code.lds.org/nexus/content/groups/main-repo)\: code.ldschurch.org
+https\://repo.maven.apache.org/maven2/.error=
+http\://mesir.googlecode.com/svn/trunk/mavenrepo/.lastUpdated=1610504925427
+@default-codelds-https\://code.lds.org/nexus/content/groups/main-repo/.lastUpdated=1609135990596
+@default-codeIds-https\://code.Ids.org/nexus/content/groups/main-repo/.lastUpdated=1610511323491
+http\://mesir.googlecode.com/svn/trunk/mavenrepo/.error=
