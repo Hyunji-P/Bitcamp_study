@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- xml 기본 문법 , 스프링 설정 파일 -->
+<beans
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans">
+
+	<bean id="abcd" class="exam.xmlbeanbind.OrderDaoImpl" />
+	<bean id="xyz" class="exam.xmlbeanbind.DeliveryDaoImpl" />
+	
+	<bean id="hohoho" class="exam.xmlbeanbind.ServiceImpl">
+		<property name="orderdao">
+			<ref bean="abcd"/>
+		</property>
+		<property name="deliverydao">
+			<ref bean="xyz"/>
+		</property>
+	</bean>
+</beans>

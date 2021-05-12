@@ -1,0 +1,5 @@
+1615966258987	Delete resource 'DopeCoffee/src/main/java/dao/ProductDao.java'
+1615966265040	Delete resource 'DopeCoffee/src/main/java/mybatis/mapproduct.xml'
+1615966269911	Delete resource 'DopeCoffee/src/main/webapp/js/product.js'
+1615966274055	Delete resource 'DopeCoffee/src/main/webapp/WEB-INF/product/productDetail.jsp'
+1615966278063	Delete resource 'DopeCoffee/target/classes/product/controller/ProductInsertController.class'

@@ -1,0 +1,21 @@
+package codeup_100;
+
+import java.util.Scanner;
+
+public class Basic_15 {
+
+	public Basic_15() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public static void main(String[] args) {
+		Scanner scan = new Scanner(System.in);
+		System.out.println("숫자를 입력하세요");
+		String a = scan.next();
+		
+		
+		
+		System.out.println(a);
+	}
+
+}

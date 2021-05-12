@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aop-reference-model>
+<aop-project name="ProjectDI"/>
+<aop-project name="SpringProject"/>
+<aop-project name="ProjectAOP"/>
+<aop-project name="MvcBasic"/>
+<aop-project name="Test_MVC"/>
+<aop-project name="Test_Mybatis"/>
+<aop-project name="ProjectMybatis"/>
+<aop-project name="Coffee"/>
+<aop-project name="DopeCoffee"/>
+</aop-reference-model>

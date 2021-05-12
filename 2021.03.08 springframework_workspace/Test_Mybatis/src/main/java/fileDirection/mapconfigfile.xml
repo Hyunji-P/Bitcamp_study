@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+	
+<configuration>
+	<typeAliases>
+		<typeAlias type="bean.Room" alias="MyRoom"/>
+		<typeAlias type="bean.Member" alias="MyMember"/>
+		<typeAlias type="bean.Reservation" alias="MyReservation"/>
+	</typeAliases>
+	
+	<environments default="test">
+		<environment id="test">
+			<transactionManager type="JDBC"/>
+			<dataSource type="POOLED">
+				<property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
+				<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+				<property name="username" value="gomdori"/>
+				<property name="password" value="oracle"/>
+			</dataSource>
+		</environment>
+	</environments>
+	
+	<mappers>
+		<mapper resource="mapper/maproom.xml"/>
+		<mapper resource="mapper/mapmember.xml"/>
+	</mappers>
+
+</configuration>

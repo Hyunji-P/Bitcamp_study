@@ -1,0 +1,14 @@
+package codeup_100;
+
+public class Basic_12 {
+
+	public Basic_12() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public static void main(String[] args) {
+		double su = 1.2345;
+		System.out.println(su);
+	}
+
+}

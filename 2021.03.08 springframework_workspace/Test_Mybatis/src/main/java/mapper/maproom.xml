@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="TestRoom">
+	<insert id="InsertData" parameterType="MyRoom">
+		insert into rooms(rono , bname, btype, maxp, price, comments)
+		values(roseq.nextval, #{bname}, #{btype}, #{maxp}, #{price}, #{comments})
+	</insert>
+	
+	<update id="UpdateData" parameterType="MyRoom">
+		update rooms 
+		set btype=#{btype}, maxp=#{maxp}, price=#{price}, comments=#{comments}
+		where bname=#{bname}
+	</update>
+	
+	<delete id="DeleteData" parameterType="String">
+		delete from rooms where bname=#{bname}
+	</delete>
+	
+	<sql id="myselect">
+		select * from rooms
+	</sql>
+	
+	<select id="SelectAllData" resultType="MyRoom">
+		<include refid="myselect" />
+		order by rono asc
+	</select>
+	
+	<select id="SelectOneData" resultType="MyRoom" parameterType="Integer">
+		<include refid="myselect" />
+		where rono=#{rono}
+	</select>
+</mapper>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="NsBoard">
+	<select id="SelectTopN" resultType="MyBoard" parameterType="java.util.HashMap">
+		select * from boards order by no desc
+	</select>
+	
+	<insert id="InsertData" parameterType="MyBoard">
+		insert into boards(no, title, writer, content, regdate, hitcount)
+		values(#{no}, #{title}, #{writer}, #{content}, #{regdate}, #{hitcount})
+	</insert>
+	
+	<update id="UpdateData" parameterType="MyBoard">
+		update boards 
+		set title=#{title},writer=#{writer},content=#{content},regdate=#{regdate},hitcount=#{hitcount}
+		where no=#{no}
+	</update>
+	
+	<delete id="DeleteData" parameterType="Integer">
+		delete from boards where no=#{no}
+	</delete>
+	
+	<sql id="MySelect">
+		select * from boards
+	</sql>
+	
+	<select id="SelectAllData" resultType="MyBoard">
+		<include refid="MySelect"/>
+	</select>
+	
+	<select id="SelectOneData" resultType="MyBoard" parameterType="Integer">
+		<include refid="MySelect"/>
+		where no=#{no}
+	</select>
+	
+	<select id="SelectNameData" resultType="MyBoard" parameterType="String">
+		<include refid="MySelect"/>
+		where name=#{name}
+	</select>
+	
+	<select id="SelectByPkId" resultType="MyBoard" parameterType="String">
+		<include refid="MySelect"/>
+		<if test="writer != null">
+			where writer=#{writer}
+		</if>
+	</select>
+	
+	<select id="TrimIf1" parameterType="java.util.HashMap" resultType="MyBoard">
+		select * from boards
+		<trim prefix="where" prefixOverrides="and|or">
+			<if test="writer != null">
+				and writer = #{writer}
+			</if>
+			<if test="hitcount != null">
+				and hitcount >= #{hitcount}
+			</if>
+		</trim>
+	</select>
+</mapper>

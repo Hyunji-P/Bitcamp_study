@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- xml 기본 문법 , 스프링 설정 파일 -->
+<beans
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans">
+
+	<bean id="aaa" class="shape.xmlconfig.CircleDao" />
+	<bean id="bbb" class="shape.xmlconfig.RectangleDao" />
+	
+	<bean id="circle" class="shape.xmlconfig.Circle">
+		<property name="shapeDao">
+			<ref bean="aaa"/>
+		</property>
+	</bean>
+	
+	<bean id="rectangle" class="shape.xmlconfig.Rectangle">
+		<property name="shapeDao">
+			<ref bean="bbb"/>
+		</property>
+	</bean>
+	
+</beans>

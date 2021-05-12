@@ -1,0 +1,8 @@
+package codeup_100;
+
+public class Snippet {
+	public static void main(String[] args) {
+		System.out.print("Hello\n");
+	}
+}
+

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<!-- 인터페이스를 사용하는 경우 네임스페이스는  -->
+<!-- 반드시 패키지 경로 + 인터페이스 이름으로 작성해야 한다.  -->
+<mapper namespace="myinterface.AlbumMapperInterface">
+	<insert id="InsertData" parameterType="MyAlbum">
+		insert into albums(id, albumname, song, lyricist, songwriter, transcription, writerdate, image, genre, mediatype, emailagree)
+		values(seqalbum.nextval, #{albumname}, #{song}, #{lyricist}, #{songwriter}, #{transcription}, #{writerdate}, #{image}, #{genre}, #{mediatype}, #{emailagree})
+	</insert>
+	<update id="UpdateData" parameterType="MyAlbum">
+		update albums 
+		set albumname=#{albumname}, song=#{song}, lyricist=#{lyricist}, songwriter=#{songwriter}, transcription=#{transcription}, 
+		writerdate=#{writerdate}, image=#{image}, genre=#{genre}, mediatype=#{mediatype}, emailagree=#{emailagree}
+		where id=#{id}
+	</update>
+	<delete id="DeleteData" parameterType="Integer">
+		delete from albums where id=#{id}
+	</delete>
+	<sql id="myselect">
+		select * from albums
+	</sql>
+	
+	<select id="GetDataList" resultType="MyAlbum">
+		<include refid="myselect"/>
+	</select>
+	
+	<select id="GetAlbumByPk" parameterType="Integer" resultType="MyAlbum">
+		<include refid="myselect"/>
+		where id=#{id}
+	</select>
+	
+	<select id="SelectTopN" resultType="MyAlbum" parameterType="java.util.HashMap">
+		<include refid="myselect"/>
+		order by song asc
+	</select>
+	
+	<select id="IfCondition" resultType="MyAlbum" parameterType="java.util.HashMap">
+		<include refid="myselect"/>
+		<if test="lyricist != null">
+			where lyricist=#{lyricist}
+		</if>
+	</select>
+	
+	<select id="Choose" resultType="MyAlbum" parameterType="java.util.HashMap">
+		<include refid="myselect"/>
+		<choose>
+			<when test="lyricist == '김이나'">
+				where lyricist=#{lyricist}
+			</when>
+			<when test="lyricist == '최갑원'">
+				where lyricist=#{lyricist}
+			</when>
+			<otherwise>
+			
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="Foreach1" resultType="MyAlbum">
+		<include refid="myselect"/>
+		where lyricist in
+		<foreach collection="array" item="item" index="index" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+	
+	<select id="Foreach2" resultType="MyAlbum">
+		<include refid="myselect"/>
+		where lyricist in
+		<foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+		
+	</select>
+	
+	
+</mapper>

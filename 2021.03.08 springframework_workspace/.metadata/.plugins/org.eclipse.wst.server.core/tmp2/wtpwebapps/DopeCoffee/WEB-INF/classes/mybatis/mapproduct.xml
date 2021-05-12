@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="NsProduct">
+	<sql id="basic_select">
+		select * from products
+	</sql>
+
+
+	<!-- 검색 , 키워드 별 건수를 조회함 -->
+	<select id="SelectTotalProductCount" parameterType="String" resultType="Integer">
+		select count(*) from products where pro_category ='p'
+		<if test="mode == 'pro_type'">
+			and pro_type like #{keyword}  
+		</if>
+		<if test="mode == 'pro_name'">
+			and pro_name like #{keyword}
+		</if>
+		
+	</select>
+	
+	<select id="SelectAllProductData" resultType="MyProduct">
+		<include refid="basic_select"/>
+			where pro_category ='p'
+		<if test="mode == 'pro_type'">
+			and pro_type like #{keyword}  
+		</if>
+		<if test="mode == 'pro_name'">
+			and pro_name like #{keyword} 
+		</if>
+		order by products_seq desc
+	</select>
+	
+	<!-- 검색 , 키워드 별 건수를 조회함 -->
+	<select id="SelectTotalCoffeeCount" parameterType="String" resultType="Integer">
+		select count(*) from products where pro_category ='c'
+		<if test="mode == 'pro_type'">
+			and pro_type like #{keyword}  
+		</if>
+		<if test="mode == 'pro_name'">
+			and pro_name like #{keyword}  
+		</if>
+		
+	</select>
+	
+	<select id="SelectAllCoffeeData" resultType="MyProduct">
+		<include refid="basic_select"/>
+		where pro_category ='c'
+		<if test="mode == 'pro_type'">
+			and pro_type like #{keyword} 
+		</if>
+		<if test="mode == 'pro_name'">
+			and pro_name like #{keyword} 
+		</if>
+		 order by products_seq desc
+	</select>
+	
+	
+	<!--상품 등록  -->
+	<insert id="InsertData" parameterType="MyProduct">
+		insert into products (products_seq, pro_type, pro_name, pro_price, pro_stock, pro_detail, pro_origin, pro_sell_email, pro_pic, pro_category)
+		values (products_seq.nextval, #{pro_type}, #{pro_name}, #{pro_price}, #{pro_stock}, #{pro_detail}, #{pro_origin}, #{pro_sell_email}, #{pro_pic}, #{pro_category})
+	</insert>
+	
+	<!-- 가장 최근 등록 수업 3개 가져오기 (메인화면용) -->
+	<select id="ShowMainView" resultType="MyProduct">
+		<include refid="basic_select"/>
+		order by products_seq desc
+	</select>
+	
+	<select id="SelectOneData" parameterType="Integer" resultType="MyProduct">
+		<include refid="basic_select"/>
+		where products_seq=#{products_seq}
+	</select>
+	
+	
+	<update id="UpdateData" parameterType="MyProduct">
+		update products set pro_type = #{pro_type}, pro_name = #{pro_name}, pro_price = #{pro_price}, pro_stock = #{pro_stock}, pro_detail = #{pro_detail}, pro_origin = #{pro_origin}, pro_pic = #{pro_pic}, pro_category = #{pro_category}
+		where products_seq = #{products_seq}
+	</update>
+	
+	<delete id="DeleteData" parameterType="Integer">
+		delete from products where products_seq = #{products_seq}
+	</delete>
+	
+	<!-- 결제 시 상품 재고 차감 -->
+	<update id="UpdateStockData" parameterType="java.util.HashMap">
+		update products set 
+		pro_stock = pro_stock <![CDATA[ - ]]> #{orders_qty}
+		where products_seq = #{orders_pro_no}
+	</update>	
+	
+		<!-- 결제 취소 시 상품 재고 plus -->
+	<update id="ReupdateStockData" parameterType="java.util.HashMap">
+		update products set 
+		pro_stock = pro_stock <![CDATA[ + ]]> #{orders_qty}
+		where products_seq = #{orders_pro_no}
+	</update>	
+	
+</mapper>

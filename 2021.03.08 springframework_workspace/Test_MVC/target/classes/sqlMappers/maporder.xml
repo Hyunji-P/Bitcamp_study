@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.rog//DTD Config 3.0//EN" 
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="NsOrder">
+	<select id="SelectAllData" resultType="MyOrder">
+		select * from orders
+	</select>
+	
+	<insert id="InsertData" parameterType="MyOrder">
+		insert into orders(or_no, or_id, or_rnum, or_seat, or_date,
+		 or_stime, or_etime, or_hour, or_price, or_pday, remark)
+		values(ord_seq.nextval , #{or_id},  1, #{or_seat}, #{or_date},
+		 #{or_stime}, #{or_etime}, #{or_hour}, #{or_price}, sysdate , '')
+	</insert>
+</mapper>

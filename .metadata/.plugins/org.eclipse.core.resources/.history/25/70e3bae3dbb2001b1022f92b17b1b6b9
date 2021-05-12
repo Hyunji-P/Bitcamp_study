@@ -1,0 +1,14 @@
+package codeup_100;
+
+public class Basic_11 {
+
+	public Basic_11() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public static void main(String[] args) {
+		int su = -1;
+		System.out.println(Math.abs(su));
+	}
+
+}

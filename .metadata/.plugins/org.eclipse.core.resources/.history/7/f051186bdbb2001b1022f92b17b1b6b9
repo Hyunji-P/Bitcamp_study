@@ -1,0 +1,15 @@
+package codeup_100;
+
+public class Basic_9 {
+
+	public Basic_9() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public static void main(String[] args) {
+		char cha = 'a';
+		System.out.println(cha);
+
+	}
+
+}

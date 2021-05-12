@@ -1,0 +1,2 @@
+0:0:0:0:0:0:0:1 - - [28/Feb/2021:00:00:14 +0900] "GET /cafe/onedayPayment.odc?code=coffee_1&bookdate=20210227&booktime=03%3A00+PM+%7E+05%3A00+PM&person=1&totalprice=20%2C000 HTTP/1.1" 200 15310
+0:0:0:0:0:0:0:1 - - [28/Feb/2021:00:00:14 +0900] "GET /cafe/css/onedayClass.css HTTP/1.1" 304 -

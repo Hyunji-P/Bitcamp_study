@@ -1,0 +1,11 @@
+회원 가입을 통하여 id="sim09" 라는 회원을 등록시킵니다. 
+다음 문장을 이용하여 게시물과 주문 테이블에 데이터를 추가하도록 합니다.
+
+insert into boards 
+values(myboard.nextval, 'jsp어려워', 'sim09', '1234', '정말 어려워요', default, default, default, default, default, default);
+
+insert into orders values(seqoid.nextval, 'sim09', sysdate, null) ; 
+
+id="sim09"인 회원에 대한 탈퇴를 수행합니다.
+boards 와 orders 테이블의 remark 컬럼을 확인합니다. 
+members 테이블에 id="sim09"회원이 삭제되었는지 확인합니다. 

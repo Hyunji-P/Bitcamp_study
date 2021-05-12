@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+	
+<!-- 이 파일은 mybatis 맵 설정 파일입니다. -->
+
+<configuration>
+	<typeAliases>
+		<typeAlias alias="MyMember" type="bean.Member"/>
+		<typeAlias alias="MyBoard" type="bean.Board"/>
+		<typeAlias alias="MyProduct" type="bean.Product"/>
+		<typeAlias alias="MyAlbum" type="bean.Album"/>
+	</typeAliases>
+	
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC"/>
+			<dataSource type="POOLED">
+				<property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
+				<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+				<property name="username" value="gomdori"/>
+				<property name="password" value="oracle"/>
+			</dataSource>
+		</environment>
+	</environments>
+	
+	<mappers>
+		<mapper resource="mapper/mapmember.xml"/>
+		<mapper resource="mapper/mapboard.xml"/>
+		<mapper resource="mapper/mapproduct.xml"/>
+		<mapper resource="mapper/mapalbum.xml"/>
+	</mappers>
+</configuration>

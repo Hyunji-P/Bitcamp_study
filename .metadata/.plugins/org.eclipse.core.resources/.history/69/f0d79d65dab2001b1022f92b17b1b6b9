@@ -1,0 +1,17 @@
+package codeup_100;
+
+public class Basic_4 {
+
+	public Basic_4() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public static void main(String[] args) {
+		System.out.println("Hello");
+		System.out.println("World");
+		
+		System.out.print("Hello\n");
+		System.out.print("World\n");
+	}
+
+}

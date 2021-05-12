@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-config.dtd">
+   
+<configuration>
+   <typeAliases>
+      <typeAlias alias="MyAlbum" type="bean.Album"/>   
+      <typeAlias alias="MyCheckBean" type="bean.CheckBean"/>   
+   </typeAliases>
+   
+   <mappers>
+      <mapper resource="album/mybatis/mapalbum.xml"/>
+   </mappers>
+</configuration>

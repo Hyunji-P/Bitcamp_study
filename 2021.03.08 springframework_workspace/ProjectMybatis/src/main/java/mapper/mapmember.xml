@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<!-- 매퍼 파일 : sql 구문을 정의하고 있는 파일이다. -->
+<mapper namespace="NsMember">
+	<insert id="InsertData" parameterType="MyMember">
+		insert into members(id, name, age, gender)
+		values(#{id}, #{name}, #{age}, #{gender})
+	</insert>
+	
+	<update id="UpdateData" parameterType="MyMember">
+		update members 
+		set name=#{name}, age=#{age}, gender=#{gender}
+		where id=#{id}
+	</update>
+	
+	<delete id="DeleteData" parameterType="String">
+		delete from members where id=#{id}
+	</delete>
+	
+	<sql id="myselect">
+		select * from members
+	</sql>
+	
+	<select id="GetMemberList" resultType="MyMember">
+		<include refid="myselect"/>
+		order by name asc
+	</select>
+	
+	<select id="GetMemberByPk" resultType="MyMember" parameterType="String">
+		<include refid="myselect"/>
+		where id=#{id}
+	</select>
+	
+	<resultMap type="MyMember" id="MemberBoardCollerction">
+		<id column="id" property="id"/>
+		<result column="name" property="name"/>
+		<result column="age" property="age"/>
+		<result column="gender" property="gender"/>
+		<collection property="boardBeans" ofType="MyBoard">
+			<id column="no" property="no"/>
+			<result column="title" property="title"/>
+			<result column="writer" property="writer"/>
+			<result column="content" property="content"/>
+			<result column="regdate" property="regdate"/>
+			<result column="hitcount" property="hitcount"/>
+		</collection>
+	</resultMap>
+	
+	<select id="GetJoinList" resultMap="MemberBoardCollerction">
+		select * 
+		from members m inner join boards mb
+		on m.id = mb.writer
+	</select>
+	
+	<select id="JoinGet3Way"  resultType="java.util.HashMap">
+		select m.name, p.pname, p.price, o.qty, p.price * o.qty as amount
+		from (members m inner join orders o
+		on m.id = o.mid) inner join products p
+		on o.pno = p.pno
+	</select>
+	
+	<select id="IfCondition" parameterType="java.util.HashMap" resultType="MyMember">
+		select * from members
+		<if test="name != null">
+			where name=#{name}
+		</if>
+	</select>
+	
+	<select id="SelectJoinList" resultType="java.util.HashMap">
+		select m.id , m.name , b.title , b.content
+		from members m inner join boards b
+		on m.id = b.writer
+	</select>
+	
+	<select id="GetMemberByName" parameterType="String" resultType="MyMember">
+		select id,name,age,gender from members
+		<if test="name != null">
+			where name=#{name}
+		</if>
+	</select>
+	
+	<select id="SelectJoinListById" resultType="java.util.HashMap" parameterType="String">
+		select m.id , m.name , b.title , b.content
+		from members m inner join boards b
+		on m.id = b.writer
+		<if test="id != null">
+			where id=#{id}
+		</if>
+	</select>
+	
+	<select id="ForEach1" resultType="MyMember">
+		select * from members
+		where name in
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+	
+	<select id="ForEach2" resultType="MyMember">
+		select * from members
+		where name in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+	
+	<select id="TrimIfCondition" resultType="MyMember" parameterType="java.util.HashMap">
+		select * from members 
+		<trim prefix="where" prefixOverrides="and|or">
+			<if test="gender != null">
+				and gender=#{gender}
+			</if>
+			<if test="age != null">
+				and age>=#{age}
+			</if>
+		</trim>
+	</select>
+	
+	<select id="SelectSQL" resultType="java.util.HashMap">
+	<![CDATA[
+		select id , age , name , gender , 
+		    case 
+		    when age<= 30 then 'yb'
+		    when age<= 50 then 'mb'
+		    else 'ob' end as result
+		from members
+	]]>
+	</select>
+</mapper>

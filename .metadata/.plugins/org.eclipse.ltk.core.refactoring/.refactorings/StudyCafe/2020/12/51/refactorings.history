@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move &apos;cos.jar, el-api.jar, javax.servlet.jar, jstl-1.2.jar, ojdbc14.jar, standard.jar&apos; to &apos;lib&apos;" description="Move 6 resources to &apos;lib&apos;" destination="WebContent/WEB-INF/lib" element1="/JspModel2/WebContent/WEB-INF/lib/cos.jar" element2="/JspModel2/WebContent/WEB-INF/lib/el-api.jar" element3="/JspModel2/WebContent/WEB-INF/lib/javax.servlet.jar" element4="/JspModel2/WebContent/WEB-INF/lib/jstl-1.2.jar" element5="/JspModel2/WebContent/WEB-INF/lib/ojdbc14.jar" element6="/JspModel2/WebContent/WEB-INF/lib/standard.jar" flags="7" id="org.eclipse.ltk.core.refactoring.move.resources" resources="6" stamp="1608200155776" updateReferences="true"/>
+</session>
